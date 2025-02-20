@@ -1,0 +1,51 @@
+[gd_scene load_steps=6 format=3 uid="uid://bituok805ql74"]
+
+[ext_resource type="Script" path="res://Scenes/Buildings/farm.gd" id="1_feses"]
+
+[sub_resource type="Gradient" id="Gradient_33jjy"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_feses"]
+gradient = SubResource("Gradient_33jjy")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_feses"]
+size = Vector2(44, 44)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hsaln"]
+size = Vector2(44, 44)
+
+[node name="Farm" type="CharacterBody2D" groups=["Ally", "Farm"]]
+collision_layer = 513
+collision_mask = 11
+script = ExtResource("1_feses")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = -1.5708
+scale = Vector2(0.175652, 44.9668)
+texture = SubResource("GradientTexture1D_feses")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -43.0
+offset_top = -97.0
+offset_right = 50.0
+offset_bottom = -22.0
+text = "Farm.
+New wave =
++2 resource"
+horizontal_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = -63.0
+offset_top = 26.0
+offset_right = 65.0
+offset_bottom = 37.0
+show_percentage = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_feses")
+
+[node name="PLACEMENT" type="Area2D" parent="."]
+collision_layer = 513
+collision_mask = 513
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PLACEMENT"]
+shape = SubResource("RectangleShape2D_hsaln")

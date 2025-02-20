@@ -1,0 +1,64 @@
+[gd_scene load_steps=7 format=3 uid="uid://b3c3vcmciayjw"]
+
+[ext_resource type="Script" path="res://Scenes/Entities/Enemies/enemy_sworder.gd" id="1_4fmws"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_yfx3f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4fmws"]
+size = Vector2(26, 34)
+
+[sub_resource type="Animation" id="Animation_754pw"]
+resource_name = "attack"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dhgrs"]
+_data = {
+"attack": SubResource("Animation_754pw")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_754pw"]
+
+[node name="EnemySworder" type="CharacterBody2D" groups=["Enemy"]]
+collision_layer = 2
+collision_mask = 7
+script = ExtResource("1_4fmws")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -20.0
+offset_top = -61.0
+offset_right = 23.0
+offset_bottom = -12.0
+text = "Enmy
+Swrd"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0, 0, 1)
+scale = Vector2(20, 20)
+texture = SubResource("PlaceholderTexture2D_yfx3f")
+
+[node name="Attack" type="Area2D" parent="."]
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Attack"]
+position = Vector2(26, 0)
+shape = SubResource("RectangleShape2D_4fmws")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_dhgrs")
+}
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = -23.0
+offset_top = 18.0
+offset_right = 25.0
+offset_bottom = 29.0
+show_percentage = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_754pw")
+
+[node name="Attack_rate" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="body_entered" from="Attack" to="." method="_on_attack_body_entered"]
+[connection signal="timeout" from="Attack_rate" to="." method="_on_attack_rate_timeout"]

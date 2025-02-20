@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=3 uid="uid://htnibqxmd8ye"]
+
+[ext_resource type="Script" path="res://Scenes/Entities/Allies/ally_archer.gd" id="1_mun1u"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_5us3l"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_alam2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mun1u"]
+radius = 203.002
+
+[node name="AllyArcher" type="CharacterBody2D" groups=["Ally"]]
+script = ExtResource("1_mun1u")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -20.0
+offset_top = -34.0
+offset_right = 19.0
+offset_bottom = -11.0
+text = "Arch"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(20, 20)
+texture = SubResource("PlaceholderTexture2D_5us3l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_alam2")
+
+[node name="Firerate" type="Timer" parent="."]
+one_shot = true
+
+[node name="RANGE" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RANGE"]
+shape = SubResource("CircleShape2D_mun1u")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = -23.0
+offset_top = 18.0
+offset_right = 25.0
+offset_bottom = 29.0
+show_percentage = false
+
+[connection signal="timeout" from="Firerate" to="." method="_on_firerate_timeout"]
+[connection signal="body_entered" from="RANGE" to="." method="_on_range_body_entered"]
+[connection signal="body_exited" from="RANGE" to="." method="_on_range_body_exited"]

@@ -1,0 +1,132 @@
+[gd_scene load_steps=5 format=3 uid="uid://cg6xtvjksmn2p"]
+
+[ext_resource type="Script" path="res://Scenes/gameplay.gd" id="1_m34ki"]
+[ext_resource type="PackedScene" uid="uid://ctwaxwojmiovc" path="res://Scenes/statue.tscn" id="1_wbxth"]
+[ext_resource type="PackedScene" uid="uid://r6an2c43hckb" path="res://Scenes/Player/player_camera.tscn" id="2_m34ki"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_m34ki"]
+font_size = 30
+
+[node name="Gameplay" type="Node2D"]
+script = ExtResource("1_m34ki")
+
+[node name="Statue" parent="." instance=ExtResource("1_wbxth")]
+
+[node name="PlayerCamera" parent="." instance=ExtResource("2_m34ki")]
+
+[node name="Entities" type="Node2D" parent="."]
+
+[node name="Allies" type="Node2D" parent="Entities" groups=["Ally_storage", "Enemy_storage"]]
+
+[node name="Hostiles" type="Node2D" parent="Entities"]
+
+[node name="Showcase" type="Node2D" parent="."]
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="BuildingList" type="ItemList" parent="UI"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -154.0
+offset_right = 224.0
+offset_bottom = 154.0
+grow_vertical = 2
+item_count = 2
+item_0/text = "Barracks(6 resource)"
+item_1/text = "Farm(6 resource)"
+
+[node name="ProgressBar" type="ProgressBar" parent="UI"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -129.0
+offset_top = -88.0
+grow_horizontal = 0
+grow_vertical = 0
+fill_mode = 3
+show_percentage = false
+
+[node name="Label" type="Label" parent="UI"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -143.0
+offset_top = -123.0
+offset_right = -5.0
+offset_bottom = -100.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Untill next attack:"
+
+[node name="Wave" type="Label" parent="UI"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+offset_right = 47.0
+grow_vertical = 0
+text = "Wave: 0"
+
+[node name="Resources" type="Label" parent="UI"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -45.0
+offset_right = 84.0
+offset_bottom = -22.0
+grow_vertical = 0
+text = "Resrouces: [AMOUNT]"
+
+[node name="Instructions" type="Label" parent="UI"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Scroll up/down for zoom
+Press left click to place down buildings
+Press right click to move camera and cancel buildings
+Make units and defend the base.
+If the redot icon gets destroyed, you lose."
+
+[node name="disselectworkers" type="Button" parent="UI"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -81.0
+offset_right = 321.0
+offset_bottom = -50.0
+grow_vertical = 0
+text = "Disselect all allies (Z/middle mouse click)"
+
+[node name="skip" type="Button" parent="UI"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -133.0
+offset_top = -153.0
+offset_right = -7.0
+offset_bottom = -122.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "SKIP"
+
+[node name="Enemyspawnpos" type="Marker2D" parent="."]
+position = Vector2(1572, 0)
+
+[node name="Label" type="Label" parent="."]
+offset_left = 736.0
+offset_top = -92.0
+offset_right = 983.0
+offset_bottom = -5.0
+text = "ENEMIES ATTACK
+<--------------"
+label_settings = SubResource("LabelSettings_m34ki")
+
+[connection signal="item_clicked" from="UI/BuildingList" to="." method="_on_building_list_item_clicked"]
+[connection signal="pressed" from="UI/disselectworkers" to="." method="_on_disselectworkers_pressed"]
+[connection signal="pressed" from="UI/skip" to="." method="_on_skip_pressed"]

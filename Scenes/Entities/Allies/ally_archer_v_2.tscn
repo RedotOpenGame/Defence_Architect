@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://ug2w5s4j52m"]
+
+[ext_resource type="PackedScene" uid="uid://7ise2ko35ge3" path="res://Scenes/Entities/Allies/baseline_ally.tscn" id="1_u0cm7"]
+[ext_resource type="Script" path="res://Scenes/Entities/Allies/ally_archer_v_2.gd" id="2_3fcs3"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_3fcs3"]
+font_size = 10
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7jve0"]
+radius = 203.002
+
+[node name="AllyArcher_v2" instance=ExtResource("1_u0cm7")]
+script = ExtResource("2_3fcs3")
+
+[node name="Label" type="Label" parent="." index="5"]
+offset_left = -11.0
+offset_top = -8.0
+offset_right = 12.0
+offset_bottom = 6.0
+text = "Arch"
+label_settings = SubResource("LabelSettings_3fcs3")
+
+[node name="Firerate" type="Timer" parent="." index="6"]
+one_shot = true
+
+[node name="RANGE" type="Area2D" parent="." index="7"]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RANGE" index="0"]
+shape = SubResource("CircleShape2D_7jve0")
+
+[connection signal="timeout" from="Firerate" to="." method="_on_firerate_timeout"]
+[connection signal="body_entered" from="RANGE" to="." method="_on_range_body_entered"]
+[connection signal="body_exited" from="RANGE" to="." method="_on_range_body_exited"]

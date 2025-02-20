@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://brm02xtpojwf7"]
+
+[ext_resource type="PackedScene" uid="uid://7ise2ko35ge3" path="res://Scenes/Entities/Allies/baseline_ally.tscn" id="1_ixtft"]
+[ext_resource type="Script" path="res://ally_sworder.gd" id="2_v0lqq"]
+[ext_resource type="Texture2D" uid="uid://dkc73sq8pqaoh" path="res://Assets/Sword.png" id="3_v0lqq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kp3o8"]
+size = Vector2(26, 34)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v0lqq"]
+radius = 120.15
+
+[node name="AllySworder" instance=ExtResource("1_ixtft")]
+script = ExtResource("2_v0lqq")
+
+[node name="Attack" type="Area2D" parent="." index="5"]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Attack" index="0"]
+position = Vector2(26, 0)
+shape = SubResource("RectangleShape2D_kp3o8")
+
+[node name="Attack_rate" type="Timer" parent="." index="6"]
+one_shot = true
+
+[node name="Sprite2D2" type="Sprite2D" parent="." index="7"]
+position = Vector2(1.19209e-07, 0)
+rotation = 0.766034
+scale = Vector2(0.0457273, 0.0457274)
+texture = ExtResource("3_v0lqq")
+
+[node name="SpottingRange" type="Area2D" parent="." index="8"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpottingRange" index="0"]
+shape = SubResource("CircleShape2D_v0lqq")
+
+[connection signal="body_entered" from="Attack" to="." method="_on_attack_body_entered"]
+[connection signal="timeout" from="Attack_rate" to="." method="_on_attack_rate_timeout"]
+[connection signal="body_entered" from="SpottingRange" to="." method="_on_spotting_range_body_entered"]
+[connection signal="body_exited" from="SpottingRange" to="." method="_on_spotting_range_body_exited"]

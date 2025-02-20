@@ -1,0 +1,78 @@
+[gd_scene load_steps=9 format=3 uid="uid://p4t53db5kwn4"]
+
+[ext_resource type="Script" path="res://Scenes/Entities/Allies/sworder.gd" id="1_wnf5a"]
+[ext_resource type="Texture2D" uid="uid://b428l62d6xaqe" path="res://Assets/grey_arrow.png" id="2_n7obb"]
+[ext_resource type="Texture2D" uid="uid://dkc73sq8pqaoh" path="res://Assets/Sword.png" id="3_hoagk"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_shm8w"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n7obb"]
+size = Vector2(26, 34)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hoagk"]
+
+[sub_resource type="Animation" id="Animation_wnf5a"]
+resource_name = "attack"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_shm8w"]
+_data = {
+"attack": SubResource("Animation_wnf5a")
+}
+
+[node name="Sworder" type="CharacterBody2D" groups=["Ally"]]
+collision_mask = 11
+script = ExtResource("1_wnf5a")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(20, 20)
+texture = SubResource("PlaceholderTexture2D_shm8w")
+
+[node name="Attack" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Attack"]
+position = Vector2(26, 0)
+shape = SubResource("RectangleShape2D_n7obb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_hoagk")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = -23.0
+offset_top = 18.0
+offset_right = 25.0
+offset_bottom = 29.0
+show_percentage = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_shm8w")
+}
+
+[node name="Attack_rate" type="Timer" parent="."]
+one_shot = true
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+layout_mode = 0
+offset_left = -14.0
+offset_top = -48.0
+offset_right = 13.0
+offset_bottom = -15.0
+texture = ExtResource("2_n7obb")
+expand_mode = 1
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(1.19209e-07, 0)
+rotation = 0.766034
+scale = Vector2(0.0457273, 0.0457274)
+texture = ExtResource("3_hoagk")
+
+[connection signal="body_entered" from="Attack" to="." method="_on_attack_body_entered"]
+[connection signal="timeout" from="Attack_rate" to="." method="_on_attack_rate_timeout"]

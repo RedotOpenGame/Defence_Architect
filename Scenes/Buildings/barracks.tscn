@@ -1,0 +1,79 @@
+[gd_scene load_steps=6 format=3 uid="uid://dcaf0tfd4dgqy"]
+
+[ext_resource type="Script" path="res://Scenes/Buildings/Scripts/barracks.gd" id="1_nabln"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hwmwf"]
+size = Vector2(86, 66)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_nabln"]
+size = Vector2(86, 66)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_hwmwf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nabln"]
+size = Vector2(86, 66)
+
+[node name="Barracks" type="CharacterBody2D" groups=["Ally"]]
+collision_layer = 513
+collision_mask = 11
+script = ExtResource("1_nabln")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_hwmwf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.396078, 1, 1, 1)
+texture = SubResource("PlaceholderTexture2D_nabln")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="WarriorList" type="ItemList" parent="Control"]
+layout_mode = 0
+offset_left = -107.0
+offset_top = -171.0
+offset_right = 109.0
+offset_bottom = -72.0
+item_count = 2
+item_0/text = "Sworder(2 resource)"
+item_1/text = "Archer(3 resource)"
+
+[node name="PreparingWarriors" type="ItemList" parent="Control"]
+layout_mode = 0
+offset_left = -123.0
+offset_top = 38.0
+offset_right = 144.0
+offset_bottom = 99.0
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(39, 0)
+scale = Vector2(4, 48)
+texture = SubResource("PlaceholderTexture2D_hwmwf")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(85, 0)
+
+[node name="Spawn" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = -77.0
+offset_top = -59.0
+offset_right = 81.0
+offset_bottom = -48.0
+show_percentage = false
+
+[node name="PLACEMENT" type="Area2D" parent="."]
+collision_layer = 513
+collision_mask = 513
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PLACEMENT"]
+shape = SubResource("RectangleShape2D_nabln")
+
+[connection signal="item_clicked" from="Control/WarriorList" to="." method="_on_warrior_list_item_clicked"]
+[connection signal="body_entered" from="PLACEMENT" to="." method="_on_placement_body_entered"]
+[connection signal="body_exited" from="PLACEMENT" to="." method="_on_placement_body_exited"]

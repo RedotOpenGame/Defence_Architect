@@ -1,0 +1,56 @@
+[gd_scene load_steps=6 format=3 uid="uid://ctwaxwojmiovc"]
+
+[ext_resource type="Script" path="res://Scenes/Buildings/statue.gd" id="1_iuhq3"]
+[ext_resource type="Texture2D" uid="uid://y5strn0bpx82" path="res://icon.svg" id="2_218gy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lscj1"]
+size = Vector2(110, 110)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_218gy"]
+radius = 311.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_218gy"]
+size = Vector2(128, 128)
+
+[node name="Statue" type="CharacterBody2D" groups=["Ally"]]
+collision_mask = 11
+script = ExtResource("1_iuhq3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_lscj1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_218gy")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = -127.0
+offset_top = -100.0
+offset_right = 131.0
+offset_bottom = -73.0
+
+[node name="Label" type="Label" parent="."]
+offset_left = -90.0
+offset_top = 68.0
+offset_right = 96.0
+offset_bottom = 91.0
+text = "Also units heal near me."
+
+[node name="HealingRange" type="Area2D" parent="."]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HealingRange"]
+shape = SubResource("CircleShape2D_218gy")
+
+[node name="HealTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="PLACEMENT" type="Area2D" parent="."]
+collision_layer = 513
+collision_mask = 513
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PLACEMENT"]
+shape = SubResource("RectangleShape2D_218gy")
+
+[connection signal="body_entered" from="HealingRange" to="." method="_on_healing_range_body_entered"]
+[connection signal="body_exited" from="HealingRange" to="." method="_on_healing_range_body_exited"]
+[connection signal="timeout" from="HealTimer" to="." method="_on_heal_timer_timeout"]

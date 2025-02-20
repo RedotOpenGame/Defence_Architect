@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://cld2oqpgmm8l4"]
+
+[ext_resource type="Script" path="res://Scenes/Projectiles/ally_arrow.gd" id="1_v8i7w"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jrre3"]
+size = Vector2(30, 4)
+
+[node name="Ally_arrow" type="Area2D"]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_v8i7w")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_jrre3")
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(-15, 0, 16, 0)
+width = 4.0
+
+[node name="Cleanup" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Cleanup" to="." method="_on_cleanup_timeout"]
