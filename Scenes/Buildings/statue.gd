@@ -15,7 +15,9 @@ func damage_func(amount) -> void:
 	prog_bar.value = health
 	if health <= 0:
 		print("The statue is dead.")
-		queue_free()
+		SaveSystem.save_game()
+		get_tree().change_scene_to_file("res://Scenes/menus/post_death_shop.tscn")
+
 
 
 func _on_healing_range_body_entered(body: Node2D) -> void:

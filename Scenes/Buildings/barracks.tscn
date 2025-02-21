@@ -33,20 +33,30 @@ offset_bottom = 40.0
 
 [node name="WarriorList" type="ItemList" parent="Control"]
 layout_mode = 0
-offset_left = -107.0
-offset_top = -171.0
-offset_right = 109.0
-offset_bottom = -72.0
+offset_left = -99.0
+offset_top = -122.0
+offset_right = 99.0
+offset_bottom = -57.0
 item_count = 2
 item_0/text = "Sworder(2 resource)"
 item_1/text = "Archer(3 resource)"
 
 [node name="PreparingWarriors" type="ItemList" parent="Control"]
 layout_mode = 0
-offset_left = -123.0
-offset_top = 38.0
-offset_right = 144.0
-offset_bottom = 99.0
+offset_left = -44.0
+offset_top = -33.0
+offset_right = 43.0
+offset_bottom = 33.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 10
+
+[node name="ProgressBar" type="ProgressBar" parent="Control"]
+layout_mode = 0
+offset_left = -43.0
+offset_top = -47.0
+offset_right = 43.0
+offset_bottom = -33.0
+show_percentage = false
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
 position = Vector2(39, 0)
@@ -74,6 +84,17 @@ collision_mask = 513
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PLACEMENT"]
 shape = SubResource("RectangleShape2D_nabln")
 
+[node name="Selection" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -43.0
+offset_top = -33.0
+offset_right = 43.0
+offset_bottom = 33.0
+
 [connection signal="item_clicked" from="Control/WarriorList" to="." method="_on_warrior_list_item_clicked"]
 [connection signal="body_entered" from="PLACEMENT" to="." method="_on_placement_body_entered"]
 [connection signal="body_exited" from="PLACEMENT" to="." method="_on_placement_body_exited"]
+[connection signal="gui_input" from="Selection" to="." method="_on_selection_gui_input"]
+[connection signal="mouse_entered" from="Selection" to="." method="_on_selection_mouse_entered"]
+[connection signal="mouse_exited" from="Selection" to="." method="_on_selection_mouse_exited"]

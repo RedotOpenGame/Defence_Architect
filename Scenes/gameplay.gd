@@ -1,5 +1,6 @@
 extends Node2D
 
+
 @onready var showcase = $Showcase
 @onready var prog_bar = $UI/ProgressBar
 @onready var resources_label = $UI/Resources
@@ -7,6 +8,7 @@ extends Node2D
 @onready var enemy_spawn_pos = $Enemyspawnpos
 @onready var enemy_enti = $Entities/Hostiles
 @onready var ally_enti = $Entities/Allies
+@onready var building_list = $UI/BuildingList
 
 const max_untill_another_attack:float = 30
 var waves_working:bool = true #meant to stop waves for debug purposes.
@@ -16,20 +18,24 @@ var player_resources = 20
 
 var enemy_sworder_scene = preload("res://Scenes/Entities/Enemies/enemy_sworder.tscn")
 
-
-var barracks_scene = preload("res://Scenes/Buildings/barracks.tscn")
-var farm_scene = preload("res://Scenes/Buildings/farm.tscn")
+var building_scenes:Dictionary = {
+	"barracks":{"scene":preload("res://Scenes/Buildings/barracks.tscn"), "cost":6},
+	"farm":{"scene":preload("res://Scenes/Buildings/farm.tscn"), "cost":6}
+}
 
 var build_mode:bool = false
 var building_cost:int
 var selected_building
 var building_to_spawn
-
+var eternal_res_reward:int = 0
 
 func _ready() -> void:
 	prog_bar.max_value = max_untill_another_attack
 	prog_bar.value = max_untill_another_attack
 	resources_label.text = str("Resources: ", Gameplay.resource)
+	
+	for i in Gameplay.owned_buildings:
+		building_list.add_item(i)
 	
 func _process(delta: float) -> void:
 	untill_another_attack -= delta
@@ -38,6 +44,8 @@ func _process(delta: float) -> void:
 	wave_label.text = str("Wave: ", curr_wave)
 	if untill_another_attack <= 0 and waves_working:
 		curr_wave += 1
+		if curr_wave % 3 == 0:
+			eternal_res_reward += 1 * floor(curr_wave / 3)
 		untill_another_attack = max_untill_another_attack
 		for i in get_tree().get_nodes_in_group("Farm"):
 			i.give_money()
@@ -78,22 +86,20 @@ func _on_building_list_item_clicked(index: int, at_position: Vector2, mouse_butt
 	if mouse_button_index == 1:
 		if is_instance_valid(selected_building):
 			selected_building.queue_free()
-		if index == 0 and Gameplay.resource >= 6:
-			building_cost = 6
-			selected_building = barracks_scene.instantiate()
-			building_to_spawn = barracks_scene
+		var new_building = building_scenes[$UI/BuildingList.get_item_text(index)]["scene"]
+		if Gameplay.resource >= building_scenes[$UI/BuildingList.get_item_text(index)]["cost"]:
+			building_cost = building_scenes[$UI/BuildingList.get_item_text(index)]["cost"]
+			selected_building = new_building.instantiate()
+			building_to_spawn = new_building
 			build_mode = false
-		if index == 1 and Gameplay.resource >= 6:
-			building_cost = 6
-			selected_building = farm_scene.instantiate()
-			building_to_spawn = farm_scene
-			build_mode = false
+
 
 func spawn_building():
 	var building = building_to_spawn.instantiate()
 	building.global_position = get_global_mouse_position()
 
 	ally_enti.add_child(building)
+
 
 
 func _on_disselectworkers_pressed() -> void:
@@ -104,3 +110,19 @@ func _on_disselectworkers_pressed() -> void:
 
 func _on_skip_pressed() -> void:
 	untill_another_attack = 0
+
+func _on_check_box_toggled(toggled_on: bool) -> void:
+	$PlayerCamera.moving_using_cursor = toggled_on
+
+
+func _on_building_list_item_hovered(index: int) -> void:
+	$UI/BuildingCost.text = str("Cost: ", building_scenes[building_list.get_item_text(index)]["cost"])
+
+
+func _on_building_list_mouse_exited() -> void:
+	$UI/BuildingCost.text = str("Cost: ")
+
+
+func _on_surrender_pressed() -> void:
+	SaveSystem.save_game()
+	get_tree().change_scene_to_file("res://Scenes/menus/post_death_shop.tscn")

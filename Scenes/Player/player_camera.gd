@@ -5,7 +5,9 @@ extends Camera2D
 var area_selection_scene = preload("res://Scenes/Misc/choosing_area.tscn") #meant to select multiple units at once.
 var dragging:bool = false
 var base_untill_camera_movement = 0.1 #basically for how long player needs to press left click before the camera moves
-var untill_camera_movement = 0.1
+var untill_camera_movement = base_untill_camera_movement
+var moving_using_cursor:bool = true
+var camera_speed:float = 400.0
 #var cheat_menu = preload("res://Pew/Scenes/Misc/cheat_menu.tscn")
 
 #@onready var quota = $UI/main/Quota
@@ -28,7 +30,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 #	quota.text = str("Quota: ", Globals.curr_quota, " / ", Globals.quota)
 #	filled_quota.text = str("Times quota was filled: ", Globals.quotas_completed)
-	if Input.is_action_pressed("left_mouse_click"): #move the camera
+	if Input.is_action_pressed("left_mouse_click") and moving_using_cursor: #move the camera
 		untill_camera_movement -= delta
 		if untill_camera_movement <= 0:
 			pressed_mouse_position = get_local_mouse_position()
@@ -40,6 +42,7 @@ func _process(delta: float) -> void:
 #		if !get_node_or_null("CheatMenu"):
 #			var menu = cheat_menu.instantiate()
 #			add_child(menu)
+	position += camera_speed * Input.get_vector("a", "d", "w", "s") * delta
 	if Input.is_action_pressed("right_mouse_click") and !dragging:
 		dragging = true
 		var scene = area_selection_scene.instantiate()
@@ -60,6 +63,10 @@ func _process(delta: float) -> void:
 		curr_zoom = min(curr_zoom + zoom_speed, max_camera_zoom)
 		zoom.x = curr_zoom
 		zoom.y = curr_zoom
+	if Input.is_action_just_pressed("x"):
+		for i in get_tree().get_nodes_in_group("Ally"):
+			if "is_selected" in i:
+				i.is_selected(true)
 	#if Input.is_action_just_pressed("middle_mouse_click"):
 		#_on_disselect_pressed()
 	#if Input.is_action_just_pressed("z"):

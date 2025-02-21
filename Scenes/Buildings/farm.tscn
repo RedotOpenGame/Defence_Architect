@@ -25,13 +25,20 @@ texture = SubResource("GradientTexture1D_feses")
 
 [node name="Label" type="Label" parent="."]
 offset_left = -43.0
-offset_top = -97.0
+offset_top = -75.0
 offset_right = 50.0
-offset_bottom = -22.0
-text = "Farm.
-New wave =
-+2 resource"
+offset_bottom = -26.0
+text = "New wave =
++1 resource"
 horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="Label"]
+offset_left = -5.0
+offset_top = -52.0
+offset_right = 96.0
+offset_bottom = 2.0
+text = "Upgrade for
+5 resource"
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 offset_left = -63.0
@@ -49,3 +56,14 @@ collision_mask = 513
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PLACEMENT"]
 shape = SubResource("RectangleShape2D_hsaln")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -23.0
+offset_top = -23.0
+offset_right = 23.0
+offset_bottom = 23.0
+
+[connection signal="mouse_entered" from="Control" to="." method="_on_control_mouse_entered"]
+[connection signal="mouse_exited" from="Control" to="." method="_on_control_mouse_exited"]
