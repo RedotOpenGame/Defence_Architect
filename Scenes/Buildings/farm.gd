@@ -8,7 +8,7 @@ func _ready() -> void:
 	prog_bar.max_value = health
 	prog_bar.value = health
 	$Label.visible = false
-	
+	$Button.visible = Gameplay.owned_building_upgrades.has("farm1")
 
 func give_money():
 	Gameplay.resource += wave_reward
@@ -30,3 +30,12 @@ func _on_control_mouse_entered() -> void:
 
 func _on_control_mouse_exited() -> void:
 	$Label.visible = false
+
+
+func _on_button_pressed() -> void:
+	if Gameplay.resource >= 5:
+		Gameplay.resource -= 5
+		wave_reward += 1
+		$Button.disabled = true
+		$Label.text = "New wave =
++2 resource"

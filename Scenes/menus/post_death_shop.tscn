@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://box7oebxyrgxw"]
+[gd_scene load_steps=3 format=3 uid="uid://box7oebxyrgxw"]
 
 [ext_resource type="Script" path="res://Scenes/menus/post_death_shop.gd" id="1_55rcw"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_55rcw"]
+font_size = 80
+font_color = Color(1, 0, 0, 1)
 
 [node name="PostDeathShop" type="Control"]
 layout_mode = 3
@@ -39,103 +43,173 @@ grow_vertical = 2
 text = "Buy farm building
 "
 
-[node name="Label2" type="Label" parent="."]
+[node name="Label2" type="Label" parent="BuyFarm"]
 layout_mode = 0
-offset_left = 96.0
-offset_top = 271.0
-offset_right = 136.0
-offset_bottom = 294.0
+offset_left = 7.0
+offset_top = 64.0
+offset_right = 200.0
+offset_bottom = 87.0
 text = "Price:10 eternal resource"
 
 [node name="FasterBarracks" type="Button" parent="."]
-layout_mode = 0
-offset_left = 399.0
-offset_top = 203.0
-offset_right = 628.0
-offset_bottom = 262.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -183.0
+offset_top = -116.0
+offset_right = 46.0
+offset_bottom = -57.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "Make barracks 
 train units faster by 10%"
 
-[node name="Label3" type="Label" parent="."]
+[node name="Label3" type="Label" parent="FasterBarracks"]
 layout_mode = 0
-offset_left = 416.0
-offset_top = 275.0
-offset_right = 609.0
-offset_bottom = 298.0
+offset_left = 23.0
+offset_top = 67.0
+offset_right = 216.0
+offset_bottom = 90.0
 text = "Price:18 eternal resource"
 
 [node name="UnlockDefTurrets" type="Button" parent="."]
-layout_mode = 0
-offset_left = 756.0
-offset_top = 198.0
-offset_right = 1031.0
-offset_bottom = 262.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 188.0
+offset_top = -131.0
+offset_right = 463.0
+offset_bottom = -67.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "Unlock defence turrets"
 
-[node name="Label4" type="Label" parent="."]
+[node name="Label4" type="Label" parent="UnlockDefTurrets"]
 layout_mode = 0
-offset_left = 806.0
-offset_top = 270.0
-offset_right = 999.0
-offset_bottom = 293.0
+offset_left = 42.0
+offset_top = 77.0
+offset_right = 235.0
+offset_bottom = 100.0
 text = "Price:25 eternal resource"
 
 [node name="UnlockBarrackUpgrade" type="Button" parent="."]
-layout_mode = 0
-offset_left = 78.0
-offset_top = 353.0
-offset_right = 258.0
-offset_bottom = 420.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -493.0
+offset_top = 20.0
+offset_right = -313.0
+offset_bottom = 87.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "Unlock upgrade for 
 barracks"
 
-[node name="Label5" type="Label" parent="."]
+[node name="Label5" type="Label" parent="UnlockBarrackUpgrade"]
 layout_mode = 0
-offset_left = 76.0
-offset_top = 437.0
-offset_right = 269.0
-offset_bottom = 460.0
+offset_left = -7.0
+offset_top = 93.0
+offset_right = 186.0
+offset_bottom = 116.0
 text = "Price:35 eternal resource"
 
 [node name="IncreaseStartResource" type="Button" parent="."]
-layout_mode = 0
-offset_left = 386.0
-offset_top = 350.0
-offset_right = 632.0
-offset_bottom = 423.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -181.0
+offset_top = 21.0
+offset_right = 65.0
+offset_bottom = 94.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "Increase starting resource by 4"
 
-[node name="Label6" type="Label" parent="."]
+[node name="Label6" type="Label" parent="IncreaseStartResource"]
 layout_mode = 0
-offset_left = 423.0
-offset_top = 435.0
-offset_right = 616.0
-offset_bottom = 458.0
+offset_left = 28.0
+offset_top = 90.0
+offset_right = 221.0
+offset_bottom = 113.0
 text = "Price:27 eternal resource"
 
 [node name="UnlockFarmUpgrade" type="Button" parent="."]
-layout_mode = 0
-offset_left = 756.0
-offset_top = 351.0
-offset_right = 998.0
-offset_bottom = 420.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 181.0
+offset_top = 21.0
+offset_right = 423.0
+offset_bottom = 90.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "Unlock upgrade for farm"
 
-[node name="Label7" type="Label" parent="."]
+[node name="Label7" type="Label" parent="UnlockFarmUpgrade"]
 layout_mode = 0
-offset_left = 775.0
-offset_top = 425.0
-offset_right = 968.0
-offset_bottom = 448.0
+offset_left = 18.0
+offset_top = 80.0
+offset_right = 211.0
+offset_bottom = 103.0
 text = "Price:35 eternal resource"
 
 [node name="Resources" type="Label" parent="."]
-layout_mode = 0
-offset_left = 423.0
-offset_top = 83.0
-offset_right = 566.0
-offset_bottom = 106.0
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -125.0
+offset_top = 98.0
+offset_right = 104.0
+offset_bottom = 121.0
+grow_horizontal = 2
 text = "Eternal Resources: [AMOUNT]"
+
+[node name="Startnew" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -176.0
+offset_top = -77.0
+offset_right = 176.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Start new game"
+
+[node name="Label8" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -566.0
+offset_top = -75.5
+offset_right = 566.0
+offset_bottom = 75.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "THIS IS A WORK IN PROGRESS"
+label_settings = SubResource("LabelSettings_55rcw")
 
 [connection signal="pressed" from="BuyFarm" to="." method="_on_buy_farm_pressed"]
 [connection signal="pressed" from="FasterBarracks" to="." method="_on_faster_barracks_pressed"]
@@ -143,3 +217,4 @@ text = "Eternal Resources: [AMOUNT]"
 [connection signal="pressed" from="UnlockBarrackUpgrade" to="." method="_on_unlock_barrack_upgrade_pressed"]
 [connection signal="pressed" from="IncreaseStartResource" to="." method="_on_increase_start_resource_pressed"]
 [connection signal="pressed" from="UnlockFarmUpgrade" to="." method="_on_unlock_farm_upgrade_pressed"]
+[connection signal="pressed" from="Startnew" to="." method="_on_startnew_pressed"]

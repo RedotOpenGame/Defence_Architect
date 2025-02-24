@@ -5,8 +5,7 @@ const FILE_NAME = "user://save_file.json"
 func save_game() -> void:
 	var contents:Dictionary = {
 		"eternal_resource":Gameplay.eternal_resource,
-		"available_buildings":Gameplay.owned_buildings,
-		"available_building_upgrades":Gameplay.owned_building_upgrades,
+		"bought_upgrades":Gameplay.bought_upgrades
 	}
 	var json_string = JSON.stringify(contents)
 	var file_access := FileAccess.open(FILE_NAME, FileAccess.WRITE)
@@ -36,7 +35,21 @@ func loader(file):
 	var data:Dictionary = json.data
 	if data.get("eternal_resource") != null:
 		Gameplay.eternal_resource = data["eternal_resource"]
-	if data.get("available_buildings") != null:
-		Gameplay.owned_buildings = data["available_buildings"]
-	if data.get("available_building_upgrades") != null:
-		Gameplay.owned_building_upgrades = data["available_building_upgrades"]
+	if data.get("bought_upgrades") != null:
+		Gameplay.bought_upgrades = data["bought_upgrades"]
+	
+	Gameplay.count_all_bought_upgrades()
+
+func delete_save_data() -> void:
+	var contents:Dictionary = {
+		"eternal_resource":0,
+		"bought_upgrades":{}
+	}
+	var json_string = JSON.stringify(contents)
+	var file_access := FileAccess.open(FILE_NAME, FileAccess.WRITE)
+	if not file_access:
+		print("An error happened while saving data: ", FileAccess.get_open_error())
+		return
+
+	file_access.store_line(json_string)
+	file_access.close()

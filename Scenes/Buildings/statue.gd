@@ -16,7 +16,7 @@ func damage_func(amount) -> void:
 	if health <= 0:
 		print("The statue is dead.")
 		SaveSystem.save_game()
-		get_tree().change_scene_to_file("res://Scenes/menus/post_death_shop.tscn")
+		get_tree().call_deferred("change_scene_to_file", "res://Scenes/menus/post_death_shop.tscn")
 
 
 

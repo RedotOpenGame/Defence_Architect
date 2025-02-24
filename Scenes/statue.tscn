@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://ctwaxwojmiovc"]
+[gd_scene load_steps=7 format=3 uid="uid://ctwaxwojmiovc"]
 
 [ext_resource type="Script" path="res://Scenes/Buildings/statue.gd" id="1_iuhq3"]
 [ext_resource type="Texture2D" uid="uid://y5strn0bpx82" path="res://icon.svg" id="2_218gy"]
+[ext_resource type="Texture2D" uid="uid://cnqnp86cncbb3" path="res://Assets/White/WhiteCircle.png" id="3_ufaa2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lscj1"]
 size = Vector2(110, 110)
@@ -19,6 +20,17 @@ script = ExtResource("1_iuhq3")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_lscj1")
 
+[node name="HealingRange" type="Area2D" parent="."]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HealingRange"]
+shape = SubResource("CircleShape2D_218gy")
+
+[node name="Sprite2D" type="Sprite2D" parent="HealingRange"]
+modulate = Color(1, 1, 1, 0.192157)
+scale = Vector2(1.48095, 1.48095)
+texture = ExtResource("3_ufaa2")
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_218gy")
 
@@ -34,12 +46,6 @@ offset_top = 68.0
 offset_right = 96.0
 offset_bottom = 91.0
 text = "Also units heal near me."
-
-[node name="HealingRange" type="Area2D" parent="."]
-collision_layer = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HealingRange"]
-shape = SubResource("CircleShape2D_218gy")
 
 [node name="HealTimer" type="Timer" parent="."]
 autostart = true

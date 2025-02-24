@@ -32,19 +32,12 @@ text = "New wave =
 +1 resource"
 horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="Label"]
-offset_left = -5.0
-offset_top = -52.0
-offset_right = 96.0
-offset_bottom = 2.0
-text = "Upgrade for
-5 resource"
-
 [node name="ProgressBar" type="ProgressBar" parent="."]
 offset_left = -63.0
 offset_top = 26.0
 offset_right = 65.0
 offset_bottom = 37.0
+mouse_filter = 1
 show_percentage = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -64,6 +57,15 @@ offset_left = -23.0
 offset_top = -23.0
 offset_right = 23.0
 offset_bottom = 23.0
+mouse_filter = 1
+
+[node name="Button" type="Button" parent="."]
+offset_left = -50.0
+offset_right = 51.0
+offset_bottom = 54.0
+text = "Upgrade for
+5 resource"
 
 [connection signal="mouse_entered" from="Control" to="." method="_on_control_mouse_entered"]
 [connection signal="mouse_exited" from="Control" to="." method="_on_control_mouse_exited"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

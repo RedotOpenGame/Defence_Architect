@@ -1,0 +1,62 @@
+[gd_scene load_steps=7 format=3 uid="uid://b1uklbfdwugwe"]
+
+[ext_resource type="Script" path="res://Scenes/Buildings/Scripts/defence_turret.gd" id="1_dn26h"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_atqps"]
+size = Vector2(50, 50)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_dn26h"]
+size = Vector2(50, 20)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4qibt"]
+radius = 243.051
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tp0od"]
+size = Vector2(50, 50)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dn26h"]
+size = Vector2(50, 50)
+
+[node name="DefenceTurret" type="CharacterBody2D" groups=["Ally"]]
+script = ExtResource("1_dn26h")
+
+[node name="base" type="Sprite2D" parent="."]
+texture = SubResource("PlaceholderTexture2D_atqps")
+
+[node name="barrel" type="Sprite2D" parent="."]
+modulate = Color(0.356863, 1, 1, 1)
+texture = SubResource("PlaceholderTexture2D_dn26h")
+offset = Vector2(25, 0)
+
+[node name="Firerate" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="Range" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Range"]
+shape = SubResource("CircleShape2D_4qibt")
+
+[node name="PLACEMENT" type="Area2D" parent="."]
+collision_layer = 513
+collision_mask = 513
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PLACEMENT"]
+shape = SubResource("RectangleShape2D_tp0od")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = -63.0
+offset_top = 26.0
+offset_right = 65.0
+offset_bottom = 37.0
+mouse_filter = 1
+show_percentage = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_dn26h")
+
+[connection signal="timeout" from="Firerate" to="." method="_on_firerate_timeout"]
+[connection signal="body_entered" from="Range" to="." method="_on_range_body_entered"]
+[connection signal="body_exited" from="Range" to="." method="_on_range_body_exited"]

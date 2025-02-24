@@ -13,14 +13,15 @@ extends Node2D
 const max_untill_another_attack:float = 30
 var waves_working:bool = true #meant to stop waves for debug purposes.
 var untill_another_attack:float = max_untill_another_attack
-var curr_wave = 0
+var curr_wave:int = 0
 var player_resources = 20
 
 var enemy_sworder_scene = preload("res://Scenes/Entities/Enemies/enemy_sworder.tscn")
 
 var building_scenes:Dictionary = {
 	"barracks":{"scene":preload("res://Scenes/Buildings/barracks.tscn"), "cost":6},
-	"farm":{"scene":preload("res://Scenes/Buildings/farm.tscn"), "cost":6}
+	"farm":{"scene":preload("res://Scenes/Buildings/farm.tscn"), "cost":6},
+	"defence turret":{"scene":preload("res://Scenes/Buildings/defence_turret.tscn"), "cost":10},
 }
 
 var build_mode:bool = false
@@ -45,7 +46,7 @@ func _process(delta: float) -> void:
 	if untill_another_attack <= 0 and waves_working:
 		curr_wave += 1
 		if curr_wave % 3 == 0:
-			eternal_res_reward += 1 * floor(curr_wave / 3)
+			Gameplay.eternal_resource += 1 * floor(curr_wave / 3)
 		untill_another_attack = max_untill_another_attack
 		for i in get_tree().get_nodes_in_group("Farm"):
 			i.give_money()
