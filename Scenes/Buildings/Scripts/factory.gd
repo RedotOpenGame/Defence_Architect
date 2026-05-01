@@ -1,12 +1,10 @@
 extends CharacterBody2D
 
-var health = 120
+var health = 180
 
-var sworder_scene = preload("res://Scenes/Entities/Allies/ally_sworder.tscn")
-var archer_scene = preload("res://Scenes/Entities/Allies/ally_archer_v_2.tscn")
+var sworder_scene = preload("res://Scenes/Entities/Allies/flying_turret.tscn")
 @onready var ally_keeper = get_tree().get_first_node_in_group("Ally_storage")
 @onready var marker = $Marker2D
-@onready var spawnpoint: Marker2D = $Spawnpoint
 @onready var trained_unit_list = $Control/PreparingWarriors
 @onready var train_bar = $Control/ProgressBar
 @onready var timer = $Spawn
@@ -25,13 +23,11 @@ func _ready() -> void:
 	$Control.visible = false
 	unit_train_time /= Gameplay.barracks_train_speed
 	train_bar.max_value = unit_train_time
-	$Control/Upgrade.visible = "barracks1" in Gameplay.owned_building_upgrades
 
 func _process(delta: float) -> void:
 	train_bar.value = timer.wait_time - timer.time_left
 	if unit_wait_list.size() > 0 and !making_a_unit:
-		$Sprite2D2.modulate = Color.DARK_GOLDENROD
-		if unit_wait_list[0] == "sworder" and Gameplay.resource >= 2:
+		if unit_wait_list[0] == "sworder" and Gameplay.resource >= 10:
 			making_a_unit = true
 			timer.start(unit_train_time)
 			await timer.timeout
@@ -40,32 +36,13 @@ func _process(delta: float) -> void:
 				unit_wait_list.remove_at(0)
 				trained_unit_list.remove_item(0)
 			var scene = sworder_scene.instantiate()
-			scene.global_position = spawnpoint.global_position
-			scene.marked_position = marker.global_position
+			scene.global_position = marker.global_position
 			ally_keeper.add_child(scene)
-			Gameplay.resource -= 2
-		elif unit_wait_list[0] == "archer" and Gameplay.resource >= 3:
-			making_a_unit = true
-			timer.start(unit_train_time)
-			await timer.timeout
-			making_a_unit = false
-			if !is_autotraining:
-				unit_wait_list.remove_at(0)
-				trained_unit_list.remove_item(0)
-			var scene = archer_scene.instantiate()
-			scene.global_position = spawnpoint.global_position
-			scene.marked_position = marker.global_position
-			ally_keeper.add_child(scene)
-			Gameplay.resource -= 3
-	if unit_wait_list.size() == 0:
-		$Sprite2D2.modulate = Color.WHITE
-	
-	if Input.is_action_just_pressed("right_mouse_click") and selected:
-		marker.global_position = get_global_mouse_position()
+			Gameplay.resource -= 10
 
 func _on_warrior_list_item_clicked(index: int, at_position: Vector2, mouse_button_index: int) -> void:
 	if mouse_button_index == 1:
-		if index == 0 and Gameplay.resource >= 2:
+		if index == 0 and Gameplay.resource >= 10:
 			unit_wait_list.append("sworder")
 			trained_unit_list.add_item("sworder")
 		if index == 1 and Gameplay.resource >= 3:
@@ -86,13 +63,11 @@ func check_area_overlaps() -> bool:
 
 func _on_selection_mouse_entered() -> void:
 	$Control.visible = true
-	$Marker2D/Sprite2D.visible = true
 
 
 func _on_selection_mouse_exited() -> void:
 	if !selected:
 		$Control.visible = false
-		$Marker2D/Sprite2D.visible = false
 
 
 func _on_selection_gui_input(event: InputEvent) -> void:

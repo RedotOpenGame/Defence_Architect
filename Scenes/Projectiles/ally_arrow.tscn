@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cld2oqpgmm8l4"]
 
-[ext_resource type="Script" path="res://Scenes/Projectiles/ally_arrow.gd" id="1_v8i7w"]
+[ext_resource type="Script" uid="uid://dql5n0o1mjs3t" path="res://Scenes/Projectiles/ally_arrow.gd" id="1_v8i7w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jrre3"]
 size = Vector2(30, 4)

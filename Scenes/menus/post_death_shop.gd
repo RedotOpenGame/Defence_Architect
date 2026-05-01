@@ -54,3 +54,8 @@ func check_if_poor(price:float) -> bool:
 		Gameplay.eternal_resource -= price
 		return true
 	return false
+
+
+func _on_resetdata_pressed() -> void:
+	SaveSystem.delete_save_data()
+	get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")

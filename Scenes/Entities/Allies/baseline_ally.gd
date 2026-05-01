@@ -1,7 +1,8 @@
 extends CharacterBody2D
 class_name BaselineAlly
 
-@export var health = 20
+@export var max_health = 20
+@onready var health = 20
 @export var speed = 240
 var selected:bool = false
 var marked_position:Vector2 #Where the player has pointed the cursor, there I'll go.
@@ -39,7 +40,7 @@ func damage_func(amount) -> void:
 	
 
 func heal_func(amount) -> void:
-	health = min(20, health + amount)
+	health = min(max_health, health + amount)
 	prog_bar.value = health
 
 func is_selected(boolean) -> void:

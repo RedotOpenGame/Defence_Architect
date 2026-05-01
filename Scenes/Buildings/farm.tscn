@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://bituok805ql74"]
 
-[ext_resource type="Script" path="res://Scenes/Buildings/farm.gd" id="1_feses"]
+[ext_resource type="Script" uid="uid://dyqxceb2wrsx" path="res://Scenes/Buildings/farm.gd" id="1_feses"]
 
 [sub_resource type="Gradient" id="Gradient_33jjy"]
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://7ise2ko35ge3"]
 
-[ext_resource type="Script" path="res://Scenes/Entities/Allies/baseline_ally.gd" id="1_2pygf"]
+[ext_resource type="Script" uid="uid://vwb5mdohckae" path="res://Scenes/Entities/Allies/baseline_ally.gd" id="1_2pygf"]
 [ext_resource type="Texture2D" uid="uid://b428l62d6xaqe" path="res://Assets/grey_arrow.png" id="2_feoqp"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_2ucfj"]

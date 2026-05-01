@@ -7,7 +7,7 @@ var resource:int = base_resource
 var eternal_resource:int = 0
 var died_for_the_first_time:bool = false
 
-var owned_buildings:Array = ["barracks"]
+var owned_buildings:Array = ["barracks", "factory"]
 var owned_building_upgrades:Array = []
 
 var barracks_train_speed = 1
@@ -18,7 +18,7 @@ var bought_upgrades:Dictionary = {} #Will store information about which upgrades
 func count_all_bought_upgrades() -> void:
 	barracks_train_speed = 1
 	starting_resource_bonus = 0
-	owned_buildings = ["barracks"]
+	owned_buildings = ["barracks", "factory"]
 	owned_building_upgrades = []
 	if bought_upgrades.has("basic_barracks_train_speed"):
 		barracks_train_speed *= 1.1

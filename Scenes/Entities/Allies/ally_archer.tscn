@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://htnibqxmd8ye"]
 
-[ext_resource type="Script" path="res://Scenes/Entities/Allies/ally_archer.gd" id="1_mun1u"]
+[ext_resource type="Script" uid="uid://bm7icg2ejkb2x" path="res://Scenes/Entities/Allies/ally_archer.gd" id="1_mun1u"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_5us3l"]
 

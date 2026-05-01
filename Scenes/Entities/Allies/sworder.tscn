@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://p4t53db5kwn4"]
 
-[ext_resource type="Script" path="res://Scenes/Entities/Allies/sworder.gd" id="1_wnf5a"]
+[ext_resource type="Script" uid="uid://cm4ghrd4whww" path="res://Scenes/Entities/Allies/sworder.gd" id="1_wnf5a"]
 [ext_resource type="Texture2D" uid="uid://b428l62d6xaqe" path="res://Assets/grey_arrow.png" id="2_n7obb"]
 [ext_resource type="Texture2D" uid="uid://dkc73sq8pqaoh" path="res://Assets/Sword.png" id="3_hoagk"]
 
@@ -16,7 +16,7 @@ resource_name = "attack"
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_shm8w"]
 _data = {
-"attack": SubResource("Animation_wnf5a")
+&"attack": SubResource("Animation_wnf5a")
 }
 
 [node name="Sworder" type="CharacterBody2D" groups=["Ally"]]

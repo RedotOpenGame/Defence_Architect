@@ -48,7 +48,7 @@ func delete_save_data() -> void:
 	var json_string = JSON.stringify(contents)
 	var file_access := FileAccess.open(FILE_NAME, FileAccess.WRITE)
 	if not file_access:
-		print("An error happened while saving data: ", FileAccess.get_open_error())
+		print("An error happened while deleting data: ", FileAccess.get_open_error())
 		return
 
 	file_access.store_line(json_string)

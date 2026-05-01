@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://dcaf0tfd4dgqy"]
+[gd_scene load_steps=7 format=3 uid="uid://dcaf0tfd4dgqy"]
 
-[ext_resource type="Script" path="res://Scenes/Buildings/Scripts/barracks.gd" id="1_nabln"]
+[ext_resource type="Script" uid="uid://b0oie5c8lmhwt" path="res://Scenes/Buildings/Scripts/barracks.gd" id="1_nabln"]
+[ext_resource type="Texture2D" uid="uid://bdjie8einmbp8" path="res://Assets/White/lined_circle.png" id="2_a1l1a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hwmwf"]
 size = Vector2(86, 66)
@@ -84,6 +85,14 @@ scale = Vector2(4, 48)
 texture = SubResource("PlaceholderTexture2D_hwmwf")
 
 [node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(85, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Marker2D"]
+visible = false
+scale = Vector2(0.123324, 0.123324)
+texture = ExtResource("2_a1l1a")
+
+[node name="Spawnpoint" type="Marker2D" parent="."]
 position = Vector2(85, 0)
 
 [node name="Spawn" type="Timer" parent="."]

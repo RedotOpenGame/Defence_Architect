@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://brm02xtpojwf7"]
 
 [ext_resource type="PackedScene" uid="uid://7ise2ko35ge3" path="res://Scenes/Entities/Allies/baseline_ally.tscn" id="1_ixtft"]
-[ext_resource type="Script" path="res://ally_sworder.gd" id="2_v0lqq"]
+[ext_resource type="Script" uid="uid://df653f7br42cg" path="res://ally_sworder.gd" id="2_v0lqq"]
 [ext_resource type="Texture2D" uid="uid://dkc73sq8pqaoh" path="res://Assets/Sword.png" id="3_v0lqq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kp3o8"]

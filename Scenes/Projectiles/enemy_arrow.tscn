@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://du4wru3os1ast"]
+
+[ext_resource type="PackedScene" uid="uid://cld2oqpgmm8l4" path="res://Scenes/Projectiles/ally_arrow.tscn" id="1_ib0vk"]
+
+[node name="Enemy_arrow" instance=ExtResource("1_ib0vk")]
+collision_layer = 8
+collision_mask = 1
+
+[node name="Line2D" parent="." index="1"]
+default_color = Color(1, 0.287307, 0.225237, 1)

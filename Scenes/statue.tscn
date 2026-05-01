@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://ctwaxwojmiovc"]
 
-[ext_resource type="Script" path="res://Scenes/Buildings/statue.gd" id="1_iuhq3"]
+[ext_resource type="Script" uid="uid://cx4r1ywdfl7in" path="res://Scenes/Buildings/statue.gd" id="1_iuhq3"]
 [ext_resource type="Texture2D" uid="uid://y5strn0bpx82" path="res://icon.svg" id="2_218gy"]
 [ext_resource type="Texture2D" uid="uid://cnqnp86cncbb3" path="res://Assets/White/WhiteCircle.png" id="3_ufaa2"]
 

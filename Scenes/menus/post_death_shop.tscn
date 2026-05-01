@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://box7oebxyrgxw"]
 
-[ext_resource type="Script" path="res://Scenes/menus/post_death_shop.gd" id="1_55rcw"]
+[ext_resource type="Script" uid="uid://dansgygh41a1x" path="res://Scenes/menus/post_death_shop.gd" id="1_55rcw"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_55rcw"]
 font_size = 80
@@ -211,6 +211,18 @@ grow_vertical = 2
 text = "THIS IS A WORK IN PROGRESS"
 label_settings = SubResource("LabelSettings_55rcw")
 
+[node name="RESETDATA" type="Button" parent="."]
+modulate = Color(1, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -194.0
+offset_bottom = 31.0
+grow_horizontal = 0
+text = "RESET DATA
+(will take you to the main menu)"
+
 [connection signal="pressed" from="BuyFarm" to="." method="_on_buy_farm_pressed"]
 [connection signal="pressed" from="FasterBarracks" to="." method="_on_faster_barracks_pressed"]
 [connection signal="pressed" from="UnlockDefTurrets" to="." method="_on_unlock_def_turrets_pressed"]
@@ -218,3 +230,4 @@ label_settings = SubResource("LabelSettings_55rcw")
 [connection signal="pressed" from="IncreaseStartResource" to="." method="_on_increase_start_resource_pressed"]
 [connection signal="pressed" from="UnlockFarmUpgrade" to="." method="_on_unlock_farm_upgrade_pressed"]
 [connection signal="pressed" from="Startnew" to="." method="_on_startnew_pressed"]
+[connection signal="pressed" from="RESETDATA" to="." method="_on_resetdata_pressed"]

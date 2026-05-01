@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://ug2w5s4j52m"]
 
 [ext_resource type="PackedScene" uid="uid://7ise2ko35ge3" path="res://Scenes/Entities/Allies/baseline_ally.tscn" id="1_u0cm7"]
-[ext_resource type="Script" path="res://Scenes/Entities/Allies/ally_archer_v_2.gd" id="2_3fcs3"]
+[ext_resource type="Script" uid="uid://daeji3feqw0gb" path="res://Scenes/Entities/Allies/ally_archer_v_2.gd" id="2_3fcs3"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_3fcs3"]
 font_size = 10

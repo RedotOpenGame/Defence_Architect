@@ -13,7 +13,7 @@ config_version=5
 config/name="Defence Architect"
 config/tags=PackedStringArray("currently_working", "github_import")
 run/main_scene="res://Scenes/main_menu.tscn"
-config/features=PackedStringArray("4.3", "Forward Plus")
+config/features=PackedStringArray("4.4", "Forward Plus", "Redot")
 config/icon="res://Assets/game_icon.png"
 
 [autoload]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://b1uklbfdwugwe"]
 
-[ext_resource type="Script" path="res://Scenes/Buildings/Scripts/defence_turret.gd" id="1_dn26h"]
+[ext_resource type="Script" uid="uid://cd1k431njrxiv" path="res://Scenes/Buildings/Scripts/defence_turret.gd" id="1_dn26h"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_atqps"]
 size = Vector2(50, 50)

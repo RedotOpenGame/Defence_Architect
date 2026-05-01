@@ -16,12 +16,14 @@ var untill_another_attack:float = max_untill_another_attack
 var curr_wave:int = 0
 var player_resources = 20
 
-var enemy_sworder_scene = preload("res://Scenes/Entities/Enemies/enemy_sworder.tscn")
+var enemy_sworder_scene = preload("res://Scenes/Entities/Enemies/enemy_archer.tscn")
+var enemy_archer_scene = preload("res://Scenes/Entities/Enemies/enemy_archer.tscn")
 
 var building_scenes:Dictionary = {
 	"barracks":{"scene":preload("res://Scenes/Buildings/barracks.tscn"), "cost":6},
 	"farm":{"scene":preload("res://Scenes/Buildings/farm.tscn"), "cost":6},
 	"defence turret":{"scene":preload("res://Scenes/Buildings/defence_turret.tscn"), "cost":10},
+	"factory":{"scene":preload("res://Scenes/Buildings/factory.tscn"), "cost":10},
 }
 
 var build_mode:bool = false
@@ -51,10 +53,18 @@ func _process(delta: float) -> void:
 		for i in get_tree().get_nodes_in_group("Farm"):
 			i.give_money()
 		Gameplay.resource += curr_wave
+		var until_archer = 5
 		for i in range(ceil((curr_wave) ** 1.3)):
-			var scene = enemy_sworder_scene.instantiate()
-			scene.position = enemy_spawn_pos.position + Vector2(randf_range(-300, 300), randf_range(-300, 300))
-			enemy_enti.add_child(scene)
+			if until_archer > 1:
+				var scene = enemy_sworder_scene.instantiate()
+				until_archer -= 1
+				scene.position = enemy_spawn_pos.position + Vector2(randf_range(-300, 300), randf_range(-300, 300))
+				enemy_enti.add_child(scene)
+			else:
+				var scene = enemy_archer_scene.instantiate()
+				until_archer = 5
+				scene.position = enemy_spawn_pos.position + Vector2(randf_range(-300, 300), randf_range(-300, 300))
+				enemy_enti.add_child(scene)
 	
 	if selected_building:
 		selected_building.global_position = lerp(selected_building.global_position, get_global_mouse_position(), 10 * delta)

@@ -1,9 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://cg6xtvjksmn2p"]
+[gd_scene load_steps=9 format=3 uid="uid://cg6xtvjksmn2p"]
 
-[ext_resource type="Script" path="res://Scenes/gameplay.gd" id="1_m34ki"]
+[ext_resource type="Script" uid="uid://bscws2b3ym78j" path="res://Scenes/gameplay.gd" id="1_m34ki"]
 [ext_resource type="PackedScene" uid="uid://ctwaxwojmiovc" path="res://Scenes/statue.tscn" id="1_wbxth"]
 [ext_resource type="PackedScene" uid="uid://r6an2c43hckb" path="res://Scenes/Player/player_camera.tscn" id="2_m34ki"]
-[ext_resource type="Script" path="res://Scenes/building_list.gd" id="4_kwrm5"]
+[ext_resource type="Texture2D" uid="uid://cnqnp86cncbb3" path="res://Assets/White/WhiteCircle.png" id="3_rlidi"]
+[ext_resource type="Script" uid="uid://00cw76rxy6xt" path="res://Scenes/building_list.gd" id="4_kwrm5"]
+[ext_resource type="PackedScene" uid="uid://dj6rpegg7280w" path="res://Scenes/Entities/Allies/flying_turret.tscn" id="4_r8bcl"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_1qnfl"]
+font_size = 64
+font_color = Color(1, 1, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_m34ki"]
 font_size = 30
@@ -13,11 +19,33 @@ script = ExtResource("1_m34ki")
 
 [node name="Statue" parent="." instance=ExtResource("1_wbxth")]
 
+[node name="Objects" type="Node2D" parent="."]
+
+[node name="Helipad" type="Node2D" parent="Objects"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Objects/Helipad"]
+self_modulate = Color(0.2484, 0.2484, 0.2484, 1)
+position = Vector2(175, -154)
+scale = Vector2(0.261905, 0.261905)
+texture = ExtResource("3_rlidi")
+
+[node name="Label" type="Label" parent="Objects/Helipad"]
+offset_left = 153.0
+offset_top = -201.0
+offset_right = 201.0
+offset_bottom = -113.0
+text = "H"
+label_settings = SubResource("LabelSettings_1qnfl")
+
 [node name="PlayerCamera" parent="." instance=ExtResource("2_m34ki")]
 
 [node name="Entities" type="Node2D" parent="."]
 
 [node name="Allies" type="Node2D" parent="Entities" groups=["Ally_storage", "Enemy_storage"]]
+
+[node name="FlyingTurret" parent="Entities/Allies" instance=ExtResource("4_r8bcl")]
+position = Vector2(176, -155)
+collision_mask = 8
 
 [node name="Hostiles" type="Node2D" parent="Entities"]
 
