@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cd7flqr1v4xkv"]
+
+[ext_resource type="Script" uid="uid://p45axmxg2ua3" path="res://Scenes/upgrades/scripts/more_player_damage.gd" id="1_ke8ym"]
+
+[node name="MorePlayerDamage" type="Node"]
+script = ExtResource("1_ke8ym")

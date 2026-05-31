@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://dwf4nwe88f6na"]
+
+[ext_resource type="Texture2D" uid="uid://cnqnp86cncbb3" path="res://Assets/White/WhiteCircle.png" id="1_2x3ev"]
+[ext_resource type="Script" uid="uid://s2caw4lh2iug" path="res://Scenes/Projectiles/enemy_grenade.gd" id="1_xiqng"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xiqng"]
+
+[node name="EnemyGrenade" type="Area2D"]
+collision_layer = 8
+script = ExtResource("1_xiqng")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.701961, 0, 0, 1)
+scale = Vector2(0.047619, 0.047619)
+texture = ExtResource("1_2x3ev")
+
+[node name="UntilExplosion" type="Timer" parent="."]
+wait_time = 0.7
+autostart = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_xiqng")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="UntilExplosion" to="." method="_on_until_explosion_timeout"]

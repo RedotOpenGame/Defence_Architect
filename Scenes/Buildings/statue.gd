@@ -10,11 +10,10 @@ func _ready() -> void:
 	prog_bar.max_value = health
 	prog_bar.value = health
 
-func damage_func(amount) -> void:
+func damage_func(amount, pierce:float = 0.0) -> void:
 	health -= amount
 	prog_bar.value = health
 	if health <= 0:
-		print("The statue is dead.")
 		SaveSystem.save_game()
 		get_tree().call_deferred("change_scene_to_file", "res://Scenes/menus/post_death_shop.tscn")
 

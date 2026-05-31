@@ -1,14 +1,11 @@
-extends CharacterBody2D
+extends BaselineEnemy
 
-var health = 20
-var speed = 240
+
 var curr_target:Node2D
-var reward_gotten:bool = false
 var can_fire:bool = true
-var targets:Array = []
 @onready var prog_bar = $ProgressBar
 
-@onready var atk_collision = $Attack/CollisionShape2D
+
 var enemy_arrow_scene:PackedScene = preload("res://Scenes/Projectiles/enemy_arrow.tscn")
 
 func _ready() -> void:
@@ -16,17 +13,15 @@ func _ready() -> void:
 	prog_bar.value = health
 
 func _process(delta: float) -> void:
+	prog_bar.value = health
+	curr_target = get_closest_target()
 	if !is_instance_valid(curr_target):
-		curr_target = get_closest_target()
-		velocity = Vector2.ZERO
-	else:
-		look_at(curr_target.global_position)
-		var direction = (curr_target.global_position - global_position).normalized()
-		velocity = speed * direction
-	if !is_instance_valid(curr_target):
-		curr_target = get_closest_target()
-	else:
-		look_at(curr_target.global_position)
+		return
+	
+	var t_pos = curr_target.global_position
+	
+	look_at(t_pos)
+	if global_position.distance_to(t_pos) < 450:
 		if can_fire:
 			can_fire = false
 			$Attack_rate.start()
@@ -35,7 +30,11 @@ func _process(delta: float) -> void:
 			scene.rotation = global_rotation
 			scene.direction = Vector2.RIGHT.rotated(global_rotation)
 			get_tree().root.add_child(scene)
-	move_and_slide()
+	else:
+		#speed = 240
+		var direction = (t_pos - global_position).normalized()
+		velocity = speed * direction
+		move_and_slide()
 
 func get_closest_target() -> Node2D:
 	var ally_list = get_tree().get_nodes_in_group("Ally")
@@ -50,14 +49,6 @@ func get_closest_target() -> Node2D:
 				chosen_enemy = i
 		return chosen_enemy
 
-func damage_func(amount) -> void:
-	health -= amount
-	prog_bar.value = health
-	if health <= 0:
-		if !reward_gotten:
-			Gameplay.resource += 1
-			reward_gotten = true
-		queue_free()
 
 
 func _on_attack_body_entered(body: Node2D) -> void:

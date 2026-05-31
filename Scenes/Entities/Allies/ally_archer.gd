@@ -58,7 +58,7 @@ func get_closest_target() -> Node2D:
 		return chosen_enemy
 
 
-func damage_func(amount) -> void:
+func damage_func(amount, pierce:float = 0.0) -> void:
 	health -= amount
 	prog_bar.value = health
 	if health <= 0:

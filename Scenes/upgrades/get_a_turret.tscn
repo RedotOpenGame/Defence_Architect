@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://58ovjs7i54vb"]
+
+[ext_resource type="Script" uid="uid://fq062scvydw0" path="res://Scenes/upgrades/scripts/get_a_turret.gd" id="1_qr3ih"]
+
+[node name="GetATurret" type="Node"]
+script = ExtResource("1_qr3ih")

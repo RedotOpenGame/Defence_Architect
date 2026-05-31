@@ -13,7 +13,7 @@ radius = 311.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_218gy"]
 size = Vector2(128, 128)
 
-[node name="Statue" type="CharacterBody2D" groups=["Ally"]]
+[node name="Statue" type="CharacterBody2D" groups=["Ally", "Statue"]]
 collision_mask = 11
 script = ExtResource("1_iuhq3")
 

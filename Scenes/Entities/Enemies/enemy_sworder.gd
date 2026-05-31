@@ -1,9 +1,8 @@
-extends CharacterBody2D
+extends BaselineEnemy
 
-var health = 20
-var speed = 240
+
 var curr_target:Node2D
-var reward_gotten:bool = false
+
 
 @onready var prog_bar = $ProgressBar
 
@@ -14,6 +13,7 @@ func _ready() -> void:
 	prog_bar.value = health
 
 func _process(delta: float) -> void:
+	prog_bar.value = health
 	if !is_instance_valid(curr_target):
 		curr_target = get_closest_target()
 		velocity = Vector2.ZERO
@@ -36,14 +36,7 @@ func get_closest_target() -> Node2D:
 				chosen_enemy = i
 		return chosen_enemy
 
-func damage_func(amount) -> void:
-	health -= amount
-	prog_bar.value = health
-	if health <= 0:
-		if !reward_gotten:
-			Gameplay.resource += 1
-			reward_gotten = true
-		queue_free()
+
 
 
 func _on_attack_body_entered(body: Node2D) -> void:

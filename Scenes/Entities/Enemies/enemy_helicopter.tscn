@@ -1,0 +1,118 @@
+[gd_scene load_steps=9 format=3 uid="uid://b2powyvr3akdb"]
+
+[ext_resource type="Texture2D" uid="uid://c32ids4bqlwtp" path="res://Assets/White/WhiteSquare.png" id="1_mfxql"]
+[ext_resource type="Script" uid="uid://dpo7gtg8by3eh" path="res://Scenes/Entities/Enemies/enemy_helicopter.gd" id="1_wlgx5"]
+[ext_resource type="Texture2D" uid="uid://cnqnp86cncbb3" path="res://Assets/White/WhiteCircle.png" id="2_wlgx5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jp8bb"]
+radius = 21.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0kq3y"]
+radius = 433.029
+
+[sub_resource type="Animation" id="Animation_wlgx5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("rotate:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_mfxql"]
+resource_name = "rotation"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("rotate:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.5708]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1rx5s"]
+_data = {
+&"RESET": SubResource("Animation_wlgx5"),
+&"rotation": SubResource("Animation_mfxql")
+}
+
+[node name="EnemyHelicopter" type="CharacterBody2D"]
+collision_layer = 130
+collision_mask = 7
+script = ExtResource("1_wlgx5")
+reward_for_killing = 2.0
+
+[node name="Barrel" type="Sprite2D" parent="."]
+modulate = Color(0.716662, 0.198929, 0.261317, 1)
+position = Vector2(28, 0)
+scale = Vector2(0.14, -0.035)
+texture = ExtResource("1_mfxql")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_wlgx5")
+
+[node name="rotate" type="Node2D" parent="."]
+
+[node name="Rect1" type="Sprite2D" parent="rotate"]
+modulate = Color(0.281187, 0.281187, 0.281187, 1)
+scale = Vector2(0.285, 0.025)
+texture = ExtResource("1_mfxql")
+
+[node name="Rect2" type="Sprite2D" parent="rotate"]
+modulate = Color(0.281187, 0.281187, 0.281187, 1)
+rotation = -1.5708
+scale = Vector2(0.285, 0.025)
+texture = ExtResource("1_mfxql")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_jp8bb")
+
+[node name="Attack_rate" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = -23.0
+offset_top = 18.0
+offset_right = 25.0
+offset_bottom = 29.0
+mouse_filter = 2
+show_percentage = false
+
+[node name="clickme" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+
+[node name="RANGE" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RANGE"]
+shape = SubResource("CircleShape2D_0kq3y")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_1rx5s")
+}
+autoplay = "rotation"
+
+[connection signal="timeout" from="Attack_rate" to="." method="_on_attack_rate_timeout"]
+[connection signal="body_entered" from="RANGE" to="." method="_on_range_body_entered"]
+[connection signal="body_exited" from="RANGE" to="." method="_on_range_body_exited"]

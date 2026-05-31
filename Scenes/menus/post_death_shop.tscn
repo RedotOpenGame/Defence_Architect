@@ -223,6 +223,12 @@ grow_horizontal = 0
 text = "RESET DATA
 (will take you to the main menu)"
 
+[node name="BackToMenu" type="Button" parent="."]
+layout_mode = 1
+offset_right = 228.0
+offset_bottom = 71.0
+text = "Back to menu"
+
 [connection signal="pressed" from="BuyFarm" to="." method="_on_buy_farm_pressed"]
 [connection signal="pressed" from="FasterBarracks" to="." method="_on_faster_barracks_pressed"]
 [connection signal="pressed" from="UnlockDefTurrets" to="." method="_on_unlock_def_turrets_pressed"]
@@ -231,3 +237,4 @@ text = "RESET DATA
 [connection signal="pressed" from="UnlockFarmUpgrade" to="." method="_on_unlock_farm_upgrade_pressed"]
 [connection signal="pressed" from="Startnew" to="." method="_on_startnew_pressed"]
 [connection signal="pressed" from="RESETDATA" to="." method="_on_resetdata_pressed"]
+[connection signal="pressed" from="BackToMenu" to="." method="_on_back_to_menu_pressed"]

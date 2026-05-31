@@ -49,7 +49,7 @@ func _on_warrior_list_item_clicked(index: int, at_position: Vector2, mouse_butto
 			unit_wait_list.append("archer")
 			trained_unit_list.add_item("archer")
 
-func damage_func(amount) -> void:
+func damage_func(amount, pierce:float = 0.0) -> void:
 	health -= amount
 	prog_bar.value = health
 	if health <= 0:

@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://byetmstefk68t"]
+
+[ext_resource type="Texture2D" uid="uid://c32ids4bqlwtp" path="res://Assets/White/WhiteSquare.png" id="1_346n4"]
+
+[node name="Laboratory" type="CharacterBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 0, 1)
+scale = Vector2(0.605, 0.315)
+texture = ExtResource("1_346n4")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+modulate = Color(0.226707, 0.226707, 0.226707, 1)
+position = Vector2(-2, -39)
+scale = Vector2(0.595, 0.065)
+texture = ExtResource("1_346n4")
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+modulate = Color(0.226707, 0.226707, 0.226707, 1)
+position = Vector2(-2, 27)
+scale = Vector2(0.595, 0.065)
+texture = ExtResource("1_346n4")

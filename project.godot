@@ -20,6 +20,7 @@ config/icon="res://Assets/game_icon.png"
 
 Gameplay="*res://Globals/Gameplay.gd"
 SaveSystem="*res://Globals/SaveSystem.gd"
+Defins="*res://Globals/Defins.gd"
 
 [global_group]
 
@@ -28,6 +29,8 @@ Enemy_storage="Node meant to keep enemies as children"
 Ally="Applies to all allies, be it unit or building. Meant for easier time finding them for enemies."
 Enemy="Should apply to all enemy nodes. For easier time retrieving them. Or recognising them as enemies."
 Farm="all buildings that can procude income are in this group."
+Player="required for finding player"
+Barracks="This node is meant for all buildings meant to train units"
 
 [input]
 
@@ -91,6 +94,21 @@ x={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":88,"key_label":0,"unicode":120,"location":0,"echo":false,"script":null)
 ]
 }
+look_at_townhall={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194438,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
+}
+f={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":70,"key_label":0,"unicode":102,"location":0,"echo":false,"script":null)
+]
+}
+right_mouse_click_and_shift={
+"deadzone": 0.2,
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":true,"ctrl_pressed":false,"meta_pressed":false,"button_mask":2,"position":Vector2(240, 26),"global_position":Vector2(249, 74),"factor":1.0,"button_index":2,"canceled":false,"pressed":true,"double_click":false,"script":null)
+]
+}
 
 [layer_names]
 
@@ -98,4 +116,6 @@ x={
 2d_physics/layer_2="Enemy"
 2d_physics/layer_3="Ally projectile"
 2d_physics/layer_4="Enemy projectile"
+2d_physics/layer_8="Air unit"
 2d_physics/layer_10="FOR BUILDING PLACEMENT"
+2d_physics/layer_11="XPorb"

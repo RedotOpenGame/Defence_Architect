@@ -47,7 +47,7 @@ show_percentage = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_shm8w")
+&"": SubResource("AnimationLibrary_shm8w")
 }
 
 [node name="Attack_rate" type="Timer" parent="."]

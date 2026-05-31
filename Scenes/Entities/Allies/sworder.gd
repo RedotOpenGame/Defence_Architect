@@ -31,7 +31,7 @@ func _process(delta: float) -> void:
 		velocity = Vector2.ZERO
 	move_and_slide()
 
-func damage_func(amount) -> void:
+func damage_func(amount, pierce:float = 0.0) -> void:
 	health -= amount
 	prog_bar.value = health
 	if health <= 0:

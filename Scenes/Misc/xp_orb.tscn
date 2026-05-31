@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://bpc1v5l2t38lf"]
+
+[ext_resource type="Script" uid="uid://i3kwm16pihdy" path="res://Scenes/Misc/xp_orb.gd" id="1_2pswm"]
+[ext_resource type="Texture2D" uid="uid://brm8x2stb0a27" path="res://Assets/White/inverted Circle light2.png" id="1_7yn2r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_brm5g"]
+size = Vector2(82, 78)
+
+[node name="XPorb" type="Area2D"]
+collision_layer = 1024
+script = ExtResource("1_2pswm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0, 1, 1, 1)
+scale = Vector2(0.533333, 0.533333)
+texture = ExtResource("1_7yn2r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_brm5g")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

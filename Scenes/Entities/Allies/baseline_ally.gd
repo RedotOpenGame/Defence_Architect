@@ -4,6 +4,7 @@ class_name BaselineAlly
 @export var max_health = 20
 @onready var health = 20
 @export var speed = 240
+@export var defence:float = 0.0
 var selected:bool = false
 var marked_position:Vector2 #Where the player has pointed the cursor, there I'll go.
 
@@ -32,7 +33,7 @@ func _process(delta: float) -> void:
 		velocity = Vector2.ZERO
 	move_and_slide()
 
-func damage_func(amount) -> void:
+func damage_func(amount, pierce:float = 0.0) -> void:
 	health -= amount
 	prog_bar.value = health
 	if health <= 0:

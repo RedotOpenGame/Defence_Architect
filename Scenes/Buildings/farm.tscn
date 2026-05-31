@@ -2,26 +2,21 @@
 
 [ext_resource type="Script" uid="uid://dyqxceb2wrsx" path="res://Scenes/Buildings/farm.gd" id="1_feses"]
 
-[sub_resource type="Gradient" id="Gradient_33jjy"]
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_feses"]
-gradient = SubResource("Gradient_33jjy")
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_feses"]
 size = Vector2(44, 44)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hsaln"]
 size = Vector2(44, 44)
 
+[sub_resource type="Gradient" id="Gradient_33jjy"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_feses"]
+gradient = SubResource("Gradient_33jjy")
+
 [node name="Farm" type="CharacterBody2D" groups=["Ally", "Farm"]]
 collision_layer = 513
 collision_mask = 11
 script = ExtResource("1_feses")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-rotation = -1.5708
-scale = Vector2(0.175652, 44.9668)
-texture = SubResource("GradientTexture1D_feses")
 
 [node name="Label" type="Label" parent="."]
 offset_left = -43.0
@@ -50,6 +45,11 @@ collision_mask = 513
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PLACEMENT"]
 shape = SubResource("RectangleShape2D_hsaln")
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = -1.5708
+scale = Vector2(0.175652, 44.9668)
+texture = SubResource("GradientTexture1D_feses")
+
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
@@ -60,12 +60,14 @@ offset_bottom = 23.0
 mouse_filter = 1
 
 [node name="Button" type="Button" parent="."]
-offset_left = -50.0
-offset_right = 51.0
-offset_bottom = 54.0
+offset_left = -49.0
+offset_top = 12.0
+offset_right = 52.0
+offset_bottom = 66.0
 text = "Upgrade for
 5 resource"
 
+[connection signal="gui_input" from="Control" to="." method="_on_control_gui_input"]
 [connection signal="mouse_entered" from="Control" to="." method="_on_control_mouse_entered"]
 [connection signal="mouse_exited" from="Control" to="." method="_on_control_mouse_exited"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

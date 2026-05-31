@@ -4,8 +4,6 @@ extends Camera2D
 
 var area_selection_scene = preload("res://Scenes/Misc/choosing_area.tscn") #meant to select multiple units at once.
 var dragging:bool = false
-var base_untill_camera_movement = 0.1 #basically for how long player needs to press left click before the camera moves
-var untill_camera_movement = base_untill_camera_movement
 var moving_using_cursor:bool = true
 var camera_speed:float = 400.0
 #var cheat_menu = preload("res://Pew/Scenes/Misc/cheat_menu.tscn")
@@ -30,26 +28,26 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 #	quota.text = str("Quota: ", Globals.curr_quota, " / ", Globals.quota)
 #	filled_quota.text = str("Times quota was filled: ", Globals.quotas_completed)
-	if Input.is_action_pressed("left_mouse_click") and moving_using_cursor: #move the camera
-		untill_camera_movement -= delta
-		if untill_camera_movement <= 0:
-			pressed_mouse_position = get_local_mouse_position()
-			position += pressed_mouse_position * delta
-	else:
-		untill_camera_movement = base_untill_camera_movement
+	if Input.is_action_just_pressed("right_mouse_click") and moving_using_cursor:
+		pressed_mouse_position = get_viewport().get_mouse_position()
+	if Input.is_action_pressed("right_mouse_click") and moving_using_cursor:
+			var current_mouse_position = get_viewport().get_mouse_position()
+			var drag_delta = current_mouse_position - pressed_mouse_position
+			position -= drag_delta / zoom
+			pressed_mouse_position = current_mouse_position
 #	if Input.is_action_just_pressed("`"):
 #		cheats_activated = true
 #		if !get_node_or_null("CheatMenu"):
 #			var menu = cheat_menu.instantiate()
 #			add_child(menu)
 	position += camera_speed * Input.get_vector("a", "d", "w", "s") * delta
-	if Input.is_action_pressed("right_mouse_click") and !dragging:
+	if Input.is_action_pressed("f") and !dragging:
 		dragging = true
 		var scene = area_selection_scene.instantiate()
 		scene.position = get_local_mouse_position()
 		scene.starting_point = get_global_mouse_position()
 		add_child(scene)
-	if Input.is_action_just_released("right_mouse_click"):
+	if Input.is_action_just_released("f"):
 		dragging = false
 	if Input.is_action_just_pressed("z") or Input.is_action_just_pressed("middle_mouse_click"):
 		for i in get_tree().get_nodes_in_group("Ally"):
@@ -67,6 +65,8 @@ func _process(delta: float) -> void:
 		for i in get_tree().get_nodes_in_group("Ally"):
 			if "is_selected" in i:
 				i.is_selected(true)
+	if Input.is_action_just_pressed("look_at_townhall"):
+		position = get_tree().get_first_node_in_group("Statue").global_position
 	#if Input.is_action_just_pressed("middle_mouse_click"):
 		#_on_disselect_pressed()
 	#if Input.is_action_just_pressed("z"):

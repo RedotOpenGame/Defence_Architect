@@ -9,10 +9,13 @@ var arrow_scene = preload("res://Scenes/Projectiles/ally_arrow.tscn")
 
 func _process(delta: float) -> void:
 	super._process(delta)
+	curr_target = find_closest_target()
 	if !is_instance_valid(curr_target):
-		curr_target = find_closest_target()
-	else:
-		look_at(curr_target.global_position)
+		return
+	var t_pos = curr_target.global_position
+	
+	look_at(t_pos)
+	if global_position.distance_to(t_pos) < 450:
 		if can_fire:
 			can_fire = false
 			$Firerate.start()
@@ -21,6 +24,8 @@ func _process(delta: float) -> void:
 			scene.rotation = global_rotation
 			scene.direction = Vector2.RIGHT.rotated(global_rotation)
 			get_tree().root.add_child(scene)
+
+
 func find_closest_target() -> Node2D:
 	var ally_list = targets
 	var closest = INF

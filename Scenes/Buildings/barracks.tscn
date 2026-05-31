@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b0oie5c8lmhwt" path="res://Scenes/Buildings/Scripts/barracks.gd" id="1_nabln"]
 [ext_resource type="Texture2D" uid="uid://bdjie8einmbp8" path="res://Assets/White/lined_circle.png" id="2_a1l1a"]
+[ext_resource type="Texture2D" uid="uid://c32ids4bqlwtp" path="res://Assets/White/WhiteSquare.png" id="2_t16mb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hwmwf"]
 size = Vector2(86, 66)
@@ -9,12 +10,10 @@ size = Vector2(86, 66)
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_nabln"]
 size = Vector2(86, 66)
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_hwmwf"]
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nabln"]
 size = Vector2(86, 66)
 
-[node name="Barracks" type="CharacterBody2D" groups=["Ally"]]
+[node name="Barracks" type="CharacterBody2D" groups=["Ally", "Barracks"]]
 collision_layer = 513
 collision_mask = 11
 script = ExtResource("1_nabln")
@@ -33,6 +32,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="WarriorList" type="ItemList" parent="Control"]
+visible = false
 layout_mode = 0
 offset_left = -99.0
 offset_top = -122.0
@@ -60,6 +60,7 @@ offset_bottom = -33.0
 show_percentage = false
 
 [node name="Upgrade" type="Button" parent="Control"]
+visible = false
 layout_mode = 0
 offset_left = -217.0
 offset_top = -28.0
@@ -80,9 +81,9 @@ text = "Auto-train:
 OFF"
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
-position = Vector2(39, 0)
-scale = Vector2(4, 48)
-texture = SubResource("PlaceholderTexture2D_hwmwf")
+position = Vector2(38, 0)
+scale = Vector2(0.0112502, -0.135)
+texture = ExtResource("2_t16mb")
 
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(85, 0)
@@ -124,6 +125,7 @@ offset_bottom = 33.0
 [connection signal="item_clicked" from="Control/WarriorList" to="." method="_on_warrior_list_item_clicked"]
 [connection signal="pressed" from="Control/Upgrade" to="." method="_on_upgrade_pressed"]
 [connection signal="toggled" from="Control/AutoTraining" to="." method="_on_auto_training_toggled"]
+[connection signal="timeout" from="Spawn" to="." method="_on_spawn_timeout"]
 [connection signal="body_entered" from="PLACEMENT" to="." method="_on_placement_body_entered"]
 [connection signal="body_exited" from="PLACEMENT" to="." method="_on_placement_body_exited"]
 [connection signal="gui_input" from="Selection" to="." method="_on_selection_gui_input"]

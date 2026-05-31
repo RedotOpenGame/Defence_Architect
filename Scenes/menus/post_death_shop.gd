@@ -59,3 +59,7 @@ func check_if_poor(price:float) -> bool:
 func _on_resetdata_pressed() -> void:
 	SaveSystem.delete_save_data()
 	get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")
+
+
+func _on_back_to_menu_pressed() -> void:
+	get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")

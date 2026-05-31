@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://0ificplgw6sr"]
+
+[ext_resource type="Texture2D" uid="uid://bl4o4ohjx7vvh" path="res://Assets/White/white_orbit.png" id="1_xjvif"]
+
+[node name="KamikadzeDrone" type="CharacterBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_xjvif")
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(0, -89, -0.500549, 0.604507, -1, 90, 87, -3, -87, -2, 0, -90)
