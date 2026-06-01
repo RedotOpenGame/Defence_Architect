@@ -17,18 +17,7 @@ func _ready() -> void:
 	$Control.visible = false
 
 	trainer.unlocked_units = ["sworder", "archer"]
-
-	upgrader.meta_unlock_key = "barracks1"
-	upgrader.tiers = [
-		{
-			"label": "Unlock Auto-Training",
-			"cost": 10,
-			"effects": [
-				{"target": "TrainerComponent", "action": "enable_autotrain"}
-			]
-		}
-	]
-	upgrader.tier_purchased.connect(_on_tier_purchased)
+	trainer.autotrain_available = true
 	trainer.queue_changed.connect(_refresh_hover_list)
 
 func _process(_delta: float) -> void:
@@ -53,12 +42,6 @@ func _refresh_hover_list() -> void:
 	preparing_list.clear()
 	for unit_name in trainer.unit_wait_list:
 		preparing_list.add_item(unit_name)
-
-func _on_tier_purchased(_tier_index: int) -> void:
-	# Notify UI to refresh its action buttons for this building.
-	var ui = get_tree().get_first_node_in_group("UI")
-	if is_instance_valid(ui) and selected:
-		ui.refresh_selected_building()
 
 func damage_func(amount: float, _pierce: float = 0.0) -> void:
 	health -= amount
