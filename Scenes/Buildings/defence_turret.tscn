@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://b1uklbfdwugwe"]
+[gd_scene load_steps=8 format=3 uid="uid://b1uklbfdwugwe"]
 
 [ext_resource type="Script" uid="uid://cd1k431njrxiv" path="res://Scenes/Buildings/Scripts/defence_turret.gd" id="1_dn26h"]
+[ext_resource type="Script" path="res://Components/UpgradeComponent.gd" id="2_upgrade"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_atqps"]
 size = Vector2(50, 50)
@@ -18,7 +19,12 @@ size = Vector2(50, 50)
 size = Vector2(50, 50)
 
 [node name="DefenceTurret" type="CharacterBody2D" groups=["Ally"]]
+collision_layer = 513
+collision_mask = 11
 script = ExtResource("1_dn26h")
+
+[node name="UpgradeComponent" type="Node" parent="."]
+script = ExtResource("2_upgrade")
 
 [node name="base" type="Sprite2D" parent="."]
 texture = SubResource("PlaceholderTexture2D_atqps")
@@ -57,6 +63,17 @@ show_percentage = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_dn26h")
 
+[node name="Selection" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -25.0
+offset_top = -25.0
+offset_right = 25.0
+offset_bottom = 25.0
+
 [connection signal="timeout" from="Firerate" to="." method="_on_firerate_timeout"]
 [connection signal="body_entered" from="Range" to="." method="_on_range_body_entered"]
 [connection signal="body_exited" from="Range" to="." method="_on_range_body_exited"]
+[connection signal="gui_input" from="Selection" to="." method="_on_selection_gui_input"]
+[connection signal="mouse_entered" from="Selection" to="." method="_on_selection_mouse_entered"]
+[connection signal="mouse_exited" from="Selection" to="." method="_on_selection_mouse_exited"]
