@@ -256,6 +256,7 @@ offset_bottom = 86.0
 text = "num"
 
 [node name="Trainformation" type="RichTextLabel" parent="."]
+visible = false
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -295,6 +296,30 @@ text = "Action 3"
 layout_mode = 2
 text = "Action 4"
 
+[node name="SelectedUnits" type="GridContainer" parent="."]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -20.0
+offset_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Aggressive" type="Button" parent="SelectedUnits"]
+layout_mode = 2
+text = "Give selected units aggressive strategy"
+
+[node name="Leash" type="Button" parent="SelectedUnits"]
+layout_mode = 2
+text = "Give selected units standard strategy"
+
+[node name="Defend" type="Button" parent="SelectedUnits"]
+layout_mode = 2
+text = "Give selected units defencive strategy"
+
 [connection signal="gui_input" from="BuildingList" to="BuildingList" method="_on_gui_input"]
 [connection signal="item_clicked" from="BuildingList" to="." method="_on_building_list_item_clicked"]
 [connection signal="item_hovered" from="BuildingList" to="." method="_on_building_list_item_hovered"]
@@ -320,3 +345,6 @@ text = "Action 4"
 [connection signal="mouse_entered" from="TrainUnits/TextureRect6" to="." method="_on_texture_rect_6_mouse_entered"]
 [connection signal="mouse_exited" from="TrainUnits/TextureRect6" to="." method="_on_texture_rect_6_mouse_exited"]
 [connection signal="pressed" from="Actions/Action1" to="." method="_on_action_1_pressed"]
+[connection signal="pressed" from="SelectedUnits/Aggressive" to="." method="_on_aggressive_pressed"]
+[connection signal="pressed" from="SelectedUnits/Leash" to="." method="_on_leash_pressed"]
+[connection signal="pressed" from="SelectedUnits/Defend" to="." method="_on_defend_pressed"]

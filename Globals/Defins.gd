@@ -15,6 +15,11 @@ const UNIT_DEFINITIONS = {
 		"scene": preload("res://Scenes/Entities/Allies/ally_wizard.tscn"),
 		"cost": 5,
 		"train_time":4,
+	},
+	"flying_turret": {
+		"scene": preload("res://Scenes/Entities/Allies/flying_turret.tscn"),
+		"cost": 10,
+		"train_time": 5.0,
 	}
 }
 

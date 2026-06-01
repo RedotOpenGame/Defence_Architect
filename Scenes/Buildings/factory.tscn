@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://bv3na6ylc61a6"]
+[gd_scene load_steps=8 format=3 uid="uid://bv3na6ylc61a6"]
 
 [ext_resource type="Script" uid="uid://ccwqljw2ili0i" path="res://Scenes/Buildings/Scripts/factory.gd" id="1_l60kd"]
-[ext_resource type="Texture2D" uid="uid://c32ids4bqlwtp" path="res://Assets/White/WhiteSquare.png" id="1_po6aq"]
-[ext_resource type="Texture2D" uid="uid://cnqnp86cncbb3" path="res://Assets/White/WhiteCircle.png" id="2_l60kd"]
+[ext_resource type="Script" path="res://Components/TrainerComponent.gd" id="2_trainer"]
+[ext_resource type="Script" path="res://Components/UpgradeComponent.gd" id="3_upgrade"]
+[ext_resource type="Texture2D" uid="uid://c32ids4bqlwtp" path="res://Assets/White/WhiteSquare.png" id="4_po6aq"]
+[ext_resource type="Texture2D" uid="uid://cnqnp86cncbb3" path="res://Assets/White/WhiteCircle.png" id="5_l60kd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kmj0l"]
 size = Vector2(128, 128)
@@ -10,25 +12,32 @@ size = Vector2(128, 128)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l60kd"]
 size = Vector2(128, 126)
 
-[node name="Factory" type="CharacterBody2D"]
+[node name="Factory" type="CharacterBody2D" groups=["Ally"]]
+collision_layer = 513
 collision_mask = 11
 script = ExtResource("1_l60kd")
 
+[node name="TrainerComponent" type="Node" parent="."]
+script = ExtResource("2_trainer")
+
+[node name="UpgradeComponent" type="Node" parent="."]
+script = ExtResource("3_upgrade")
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.32, 0.32)
-texture = ExtResource("1_po6aq")
+texture = ExtResource("4_po6aq")
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
 modulate = Color(0, 0, 0, 1)
 position = Vector2(-39, -38)
 scale = Vector2(0.0904762, 0.0904762)
-texture = ExtResource("2_l60kd")
+texture = ExtResource("5_l60kd")
 
 [node name="Sprite2D3" type="Sprite2D" parent="."]
 modulate = Color(0, 0, 0, 1)
 position = Vector2(-40, 6)
 scale = Vector2(0.0904762, 0.0904762)
-texture = ExtResource("2_l60kd")
+texture = ExtResource("5_l60kd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_kmj0l")
@@ -45,15 +54,6 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-
-[node name="WarriorList" type="ItemList" parent="Control"]
-layout_mode = 0
-offset_left = -106.0
-offset_top = -119.0
-offset_right = 110.0
-offset_bottom = -76.0
-item_count = 1
-item_0/text = "Flying Turret(10 resource)"
 
 [node name="PreparingWarriors" type="ItemList" parent="Control"]
 layout_mode = 0
@@ -75,6 +75,11 @@ show_percentage = false
 [node name="Spawn" type="Timer" parent="."]
 one_shot = true
 
+[node name="Spawnpoint" type="Marker2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(64, 0)
+
 [node name="PLACEMENT" type="Area2D" parent="."]
 collision_layer = 513
 collision_mask = 513
@@ -85,14 +90,12 @@ shape = SubResource("RectangleShape2D_l60kd")
 [node name="Selection" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_left = -43.0
-offset_top = -33.0
-offset_right = 43.0
-offset_bottom = 33.0
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
 
-[node name="Marker2D" type="Marker2D" parent="."]
-
-[connection signal="item_clicked" from="Control/WarriorList" to="." method="_on_warrior_list_item_clicked"]
+[connection signal="timeout" from="Spawn" to="." method="_on_spawn_timeout"]
 [connection signal="gui_input" from="Selection" to="." method="_on_selection_gui_input"]
 [connection signal="mouse_entered" from="Selection" to="." method="_on_selection_mouse_entered"]
 [connection signal="mouse_exited" from="Selection" to="." method="_on_selection_mouse_exited"]

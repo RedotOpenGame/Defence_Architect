@@ -38,7 +38,7 @@ func _process(_delta: float) -> void:
 	if control:
 		control.rotation = -rotation
 
-	if selected and Input.is_action_just_pressed("left_mouse_click"):
+	if selected and Input.is_action_pressed("left_mouse_click"):
 		marked_position = get_global_mouse_position()
 		home_position = marked_position
 
@@ -117,6 +117,7 @@ func damage_func(amount, pierce: float = 0.0) -> void:
 	health -= actual
 	prog_bar.value = health
 	if health <= 0:
+		is_selected(false)
 		queue_free()
 
 func heal_func(amount) -> void:
@@ -125,6 +126,10 @@ func heal_func(amount) -> void:
 
 func is_selected(boolean: bool) -> void:
 	selected = boolean
+	if boolean:
+		get_tree().get_first_node_in_group("UI").selected_units.append(self)
+	else:
+		get_tree().get_first_node_in_group("UI").selected_units.erase(self)
 
 func _on_clickme_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == 1 and event.pressed:
