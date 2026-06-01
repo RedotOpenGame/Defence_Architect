@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://htnibqxmd8ye"]
+[gd_scene load_steps=7 format=3 uid="uid://htnibqxmd8ye"]
 
 [ext_resource type="Script" uid="uid://bm7icg2ejkb2x" path="res://Scenes/Entities/Allies/ally_archer.gd" id="1_mun1u"]
+[ext_resource type="Texture2D" uid="uid://b428l62d6xaqe" path="res://Assets/grey_arrow.png" id="2_mun1u"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_5us3l"]
 
@@ -43,6 +44,30 @@ offset_right = 25.0
 offset_bottom = 29.0
 show_percentage = false
 
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 10.0
+offset_bottom = 10.0
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+layout_mode = 0
+offset_left = -11.0
+offset_top = -38.0
+offset_right = 11.0
+offset_bottom = -13.0
+texture = ExtResource("2_mun1u")
+expand_mode = 1
+
+[node name="clickme" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+
 [connection signal="timeout" from="Firerate" to="." method="_on_firerate_timeout"]
 [connection signal="body_entered" from="RANGE" to="." method="_on_range_body_entered"]
 [connection signal="body_exited" from="RANGE" to="." method="_on_range_body_exited"]
+[connection signal="gui_input" from="clickme" to="." method="_on_clickme_gui_input"]
