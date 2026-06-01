@@ -9,6 +9,8 @@ extends CanvasLayer
 
 @onready var ally_enti = get_tree().get_first_node_in_group("Ally_storage")
 
+var selected_units:Array = []
+
 var build_mode: bool = false
 var building_cost: int
 var selected_building  # building being placed (placement mode)
@@ -140,6 +142,7 @@ func _process(_delta: float) -> void:
 		selected_building.collision_layer = 512
 		selected_building.collision_mask = 512
 		selected_building.modulate = Color(1, 1, 1, 0.4)
+		selected_building.process_mode = ProcessMode.PROCESS_MODE_DISABLED
 		if selected_building not in ally_enti.get_children():
 			ally_enti.add_child(selected_building)
 
@@ -269,3 +272,19 @@ func _on_surrender_pressed() -> void:
 # Legacy: kept so existing tscn connection doesn't error if present.
 func _on_action_1_pressed() -> void:
 	pass
+
+# ── Unit Control ──────────────────────────────────────────────────────────────────────
+
+func _on_aggressive_pressed() -> void:
+	for i in selected_units:
+		i.engagement_mode = i.EngagementMode.AGGRESSIVE
+
+
+func _on_leash_pressed() -> void:
+	for i in selected_units:
+		i.engagement_mode = i.EngagementMode.STANDARD
+
+
+func _on_defend_pressed() -> void:
+	for i in selected_units:
+		i.engagement_mode = i.EngagementMode.DEFENSIVE

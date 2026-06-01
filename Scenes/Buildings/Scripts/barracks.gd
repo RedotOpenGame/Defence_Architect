@@ -16,7 +16,7 @@ func _ready() -> void:
 	prog_bar.value = health
 	$Control.visible = false
 
-	trainer.unlocked_units = ["sworder", "archer"]
+	trainer.unlocked_units = ["sworder", "archer", "wizard"]
 	trainer.autotrain_available = true
 	trainer.queue_changed.connect(_refresh_hover_list)
 

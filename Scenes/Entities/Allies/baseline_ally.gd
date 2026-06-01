@@ -32,13 +32,13 @@ func _ready() -> void:
 	if arrow:
 		arrow.visible = false
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if arrow:
 		arrow.visible = selected
 	if control:
 		control.rotation = -rotation
 
-	if selected and Input.is_action_just_pressed("left_mouse_click"):
+	if selected and Input.is_action_pressed("left_mouse_click"):
 		marked_position = get_global_mouse_position()
 		home_position = marked_position
 
@@ -113,7 +113,7 @@ func _get_separation() -> Vector2:
 	for a in get_tree().get_nodes_in_group("Ally"):
 		if a == self or not a is CharacterBody2D:
 			continue
-		var diff := global_position - a.global_position
+		var diff :Vector2= global_position - a.global_position
 		var dist_sq := diff.length_squared()
 		if dist_sq < sep_sq and dist_sq > 0.25:
 			var dist := sqrt(dist_sq)
@@ -123,10 +123,11 @@ func _get_separation() -> Vector2:
 	return Vector2.ZERO
 
 func damage_func(amount, pierce: float = 0.0) -> void:
-	var actual := max(0.0, amount - max(0.0, defence - pierce))
+	var actual:float= max(0.0, amount - max(0.0, defence - pierce))
 	health -= actual
 	prog_bar.value = health
 	if health <= 0:
+		is_selected(false)
 		queue_free()
 
 func heal_func(amount) -> void:
@@ -135,6 +136,10 @@ func heal_func(amount) -> void:
 
 func is_selected(boolean: bool) -> void:
 	selected = boolean
+	if boolean:
+		get_tree().get_first_node_in_group("UI").selected_units.append(self)
+	else:
+		get_tree().get_first_node_in_group("UI").selected_units.erase(self)
 
 func _on_clickme_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == 1 and event.pressed:
