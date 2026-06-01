@@ -63,14 +63,6 @@ func find_closest_target() -> Node2D:
 	chase_target = chosen
 	return chosen
 
-func _has_enemy_in_attack_range() -> bool:
-	if attack_range <= 0.0:
-		return false
-	for t in targets:
-		if global_position.distance_to(t.global_position) <= attack_range:
-			return true
-	return false
-
 func _update_movement() -> void:
 	var sep := _get_separation()
 
@@ -84,21 +76,19 @@ func _update_movement() -> void:
 				velocity = sep
 
 		EngagementMode.STANDARD:
-			if is_instance_valid(chase_target):
-				var dist_to_enemy := global_position.distance_to(chase_target.global_position)
-				if attack_range > 0.0 and dist_to_enemy <= attack_range:
-					velocity = sep
-				elif global_position.distance_to(home_position) < max_chase_distance:
+			# Player-commanded move always takes priority
+			if marked_position != Vector2.ZERO and global_position.distance_to(marked_position) > 4.0:
+				_move_toward(marked_position, sep)
+			elif is_instance_valid(chase_target):
+				if global_position.distance_to(home_position) < max_chase_distance:
 					_move_toward(chase_target.global_position, sep)
 				else:
 					_move_toward(home_position, sep)
-			elif marked_position != Vector2.ZERO and not _has_enemy_in_attack_range() and global_position.distance_to(marked_position) > 4.0:
-				_move_toward(marked_position, sep)
 			else:
 				velocity = sep
 
 		EngagementMode.DEFENSIVE:
-			if marked_position != Vector2.ZERO and not _has_enemy_in_attack_range() and global_position.distance_to(marked_position) > 4.0:
+			if marked_position != Vector2.ZERO and global_position.distance_to(marked_position) > 4.0:
 				_move_toward(marked_position, sep)
 			else:
 				velocity = sep
@@ -113,7 +103,7 @@ func _get_separation() -> Vector2:
 	for a in get_tree().get_nodes_in_group("Ally"):
 		if a == self or not a is CharacterBody2D:
 			continue
-		var diff :Vector2= global_position - a.global_position
+		var diff := global_position - a.global_position
 		var dist_sq := diff.length_squared()
 		if dist_sq < sep_sq and dist_sq > 0.25:
 			var dist := sqrt(dist_sq)
@@ -123,7 +113,7 @@ func _get_separation() -> Vector2:
 	return Vector2.ZERO
 
 func damage_func(amount, pierce: float = 0.0) -> void:
-	var actual:float= max(0.0, amount - max(0.0, defence - pierce))
+	var actual := max(0.0, amount - max(0.0, defence - pierce))
 	health -= actual
 	prog_bar.value = health
 	if health <= 0:
