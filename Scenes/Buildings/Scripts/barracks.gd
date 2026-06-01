@@ -78,6 +78,9 @@ func _on_selection_gui_input(event: InputEvent) -> void:
 		else:
 			ui.on_building_deselected()
 
+func ui_cleanup() -> void:
+	_on_selection_mouse_exited()
+
 func _on_selection_mouse_entered() -> void:
 	$Control.visible = true
 	$Marker2D/Sprite2D.visible = true

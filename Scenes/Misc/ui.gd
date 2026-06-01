@@ -36,6 +36,7 @@ func on_building_selected(building: Node) -> void:
 	# Deselect previous building if different.
 	if is_instance_valid(_selected_building) and _selected_building != building:
 		_selected_building.selected = false
+		_selected_building.ui_cleanup()
 
 	_selected_building = building
 	selected_trainer = building.get_node_or_null("TrainerComponent")

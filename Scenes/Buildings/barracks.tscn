@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://dcaf0tfd4dgqy"]
 
 [ext_resource type="Script" uid="uid://b0oie5c8lmhwt" path="res://Scenes/Buildings/Scripts/barracks.gd" id="1_nabln"]
-[ext_resource type="Script" path="res://Components/TrainerComponent.gd" id="2_trainer"]
-[ext_resource type="Script" path="res://Components/UpgradeComponent.gd" id="3_upgrade"]
+[ext_resource type="Script" uid="uid://vqwdmkyni3ii" path="res://Components/TrainerComponent.gd" id="2_trainer"]
+[ext_resource type="Script" uid="uid://q7dj6eoumwib" path="res://Components/UpgradeComponent.gd" id="3_upgrade"]
 [ext_resource type="Texture2D" uid="uid://bdjie8einmbp8" path="res://Assets/White/lined_circle.png" id="4_a1l1a"]
 [ext_resource type="Texture2D" uid="uid://c32ids4bqlwtp" path="res://Assets/White/WhiteSquare.png" id="5_t16mb"]
 
