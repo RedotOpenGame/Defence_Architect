@@ -8,7 +8,7 @@ func _ready() -> void:
 
 func _on_attack_body_entered(body: Node2D) -> void:
 	if "damage_func" in body:
-		body.damage_func(3)
+		body.damage_func(3 * stat_multiplier)
 		atk_collision.set_deferred("disabled", true)
 		$Attack_rate.start()
 

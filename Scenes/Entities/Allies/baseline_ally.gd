@@ -11,6 +11,7 @@ enum EngagementMode { AGGRESSIVE, STANDARD, DEFENSIVE }
 @export var attack_range: float = 0.0
 @export var base_damage: float = 1.0
 
+var stat_multiplier: float = 1.0
 var health: float = 20.0
 var selected: bool = false
 var marked_position: Vector2 = Vector2.ZERO

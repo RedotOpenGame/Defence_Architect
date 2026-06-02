@@ -1,36 +1,82 @@
 extends CharacterBody2D
 
-@onready var recharge: Timer = $recharge
-@onready var progress_bar: ProgressBar = $ProgressBar
+var health: int = 80
+var selected: bool = false
+var on_cooldown: bool = false
 
-var unit_supposed_to_be_made:PackedScene = preload("res://Scenes/Entities/Allies/x5_ally_sworder.tscn")
+const REQUIRED_COUNT: int = 5
+const STAT_MULT: float = 5.0
 
-var ready_to_create_unit:bool = true
-var units_prepared:Array = []
+@onready var prog_bar: ProgressBar = $ProgressBar
 
 func _ready() -> void:
-	progress_bar.max_value = recharge.wait_time
+	prog_bar.max_value = health
+	prog_bar.value = health
 
-func _process(delta: float) -> void:
-	progress_bar.value = recharge.wait_time - recharge.time_left
-	if units_prepared.size() >= 5 and ready_to_create_unit:
-		for i in range(0, 5):
-			units_prepared[i].queue_free()
-		ready_to_create_unit = false
-		recharge.start()
-		var s = unit_supposed_to_be_made.instantiate()
-		s.position = global_position
-		get_tree().get_first_node_in_group("Ally_storage").add_child(s)
+func _process(_delta: float) -> void:
+	if not on_cooldown:
+		_check_for_compound()
 
-func _on_recharge_timeout() -> void:
-	ready_to_create_unit = true
+func _check_for_compound() -> void:
+	var by_script: Dictionary = {}
+	for node in get_tree().get_nodes_in_group("Ally"):
+		if not node is BaselineAlly:
+			continue
+		var s = node.get_script()
+		if s == null:
+			continue
+		if not by_script.has(s):
+			by_script[s] = []
+		by_script[s].append(node)
+
+	for s in by_script:
+		var group: Array = by_script[s]
+		if group.size() >= REQUIRED_COUNT:
+			_compound(group.slice(0, REQUIRED_COUNT))
+			return
+
+func _compound(units: Array) -> void:
+	var template: BaselineAlly = units[0]
+	var scene_path: String = template.scene_file_path
+	if scene_path.is_empty():
+		return
+
+	for u in units:
+		u.queue_free()
+
+	var packed: PackedScene = load(scene_path)
+	if packed == null:
+		return
+
+	var x5: BaselineAlly = packed.instantiate()
+	x5.max_health *= STAT_MULT
+	x5.stat_multiplier = STAT_MULT
+	x5.position = position + Vector2(100, 0)
+
+	get_parent().add_child(x5)
+
+	# Add a small label so the x5 unit is visually distinct
+	var label := Label.new()
+	label.text = "x5"
+	label.position = Vector2(-10, -45)
+	label.add_theme_color_override("font_color", Color.GOLD)
+	x5.add_child(label)
+
+	on_cooldown = true
+	$Cooldown.start()
+
+func _on_cooldown_timeout() -> void:
+	on_cooldown = false
+
+func damage_func(amount, _pierce: float = 0.0) -> void:
+	health -= amount
+	prog_bar.value = health
+	if health <= 0:
+		queue_free()
 
 func check_area_overlaps() -> bool:
 	return $PLACEMENT.get_overlapping_areas() == []
 
-func _on_placement_body_entered(body: Node2D) -> void:
-	units_prepared.append(body)
-
-
-func _on_placement_body_exited(body: Node2D) -> void:
-	units_prepared.erase(body)
+func _on_selection_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.button_index == 1 and event.pressed:
+		selected = not selected

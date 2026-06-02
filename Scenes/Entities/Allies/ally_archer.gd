@@ -21,6 +21,7 @@ func _process(delta: float) -> void:
 		scene.position = global_position
 		scene.rotation = global_rotation
 		scene.direction = Vector2.RIGHT.rotated(global_rotation)
+		scene.damage *= stat_multiplier
 		get_tree().root.add_child(scene)
 
 func _on_firerate_timeout() -> void:
