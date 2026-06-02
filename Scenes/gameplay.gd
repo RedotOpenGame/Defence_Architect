@@ -34,6 +34,7 @@ var building_scenes:Dictionary = {
 	"farm":{"scene":preload("res://Scenes/Buildings/farm.tscn"), "cost":6},
 	"defence turret":{"scene":preload("res://Scenes/Buildings/defence_turret.tscn"), "cost":10},
 	"factory":{"scene":preload("res://Scenes/Buildings/factory.tscn"), "cost":10},
+	"compounder":{"scene":preload("res://Scenes/Buildings/compounder.tscn"), "cost":12},
 }
 
 var build_mode:bool = false

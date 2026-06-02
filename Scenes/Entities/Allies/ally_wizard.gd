@@ -21,7 +21,7 @@ func _process(delta: float) -> void:
 		scene.position = global_position
 		scene.rotation = global_rotation
 		scene.direction = Vector2.RIGHT.rotated(global_rotation)
-		scene.damage = 1
+		scene.damage = 1 * stat_multiplier
 		scene.armor_pierce = 3
 		scene.modulate = Color.YELLOW
 		get_tree().root.add_child(scene)
