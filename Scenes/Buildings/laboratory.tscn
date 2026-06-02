@@ -1,8 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://byetmstefk68t"]
+[gd_scene load_steps=6 format=3 uid="uid://byetmstefk68t"]
 
 [ext_resource type="Texture2D" uid="uid://c32ids4bqlwtp" path="res://Assets/White/WhiteSquare.png" id="1_346n4"]
+[ext_resource type="Script" uid="uid://b1l0x7eryfw6c" path="res://Scenes/Buildings/Scripts/laboratory.gd" id="1_ih03e"]
+[ext_resource type="Script" uid="uid://vqwdmkyni3ii" path="res://Components/TrainerComponent.gd" id="3_r0g68"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k2eom"]
+size = Vector2(242, 126)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_68c54"]
+size = Vector2(242, 126)
 
 [node name="Laboratory" type="CharacterBody2D"]
+script = ExtResource("1_ih03e")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 0, 1)
@@ -20,3 +29,16 @@ modulate = Color(0.226707, 0.226707, 0.226707, 1)
 position = Vector2(-2, 27)
 scale = Vector2(0.595, 0.065)
 texture = ExtResource("1_346n4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_k2eom")
+
+[node name="PLACEMENT" type="Area2D" parent="."]
+collision_layer = 513
+collision_mask = 513
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PLACEMENT"]
+shape = SubResource("RectangleShape2D_68c54")
+
+[node name="TrainerComponent" type="Node" parent="."]
+script = ExtResource("3_r0g68")

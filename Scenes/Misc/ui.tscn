@@ -9,26 +9,35 @@
 script = ExtResource("1_3sq67")
 
 [node name="BuildingList" type="ItemList" parent="."]
-anchors_preset = 4
+anchors_preset = 6
+anchor_left = 1.0
 anchor_top = 0.5
+anchor_right = 1.0
 anchor_bottom = 0.5
-offset_top = -154.0
-offset_right = 224.0
-offset_bottom = 154.0
+offset_left = -227.0
+offset_top = -110.0
+offset_right = -3.0
+offset_bottom = 198.0
+grow_horizontal = 0
 grow_vertical = 2
 script = ExtResource("2_wdxsr")
 
 [node name="Resources" type="Label" parent="."]
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -45.0
-offset_right = 84.0
-offset_bottom = -22.0
-grow_vertical = 0
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -219.0
+offset_top = 229.0
+offset_right = -49.0
+offset_bottom = 252.0
+grow_horizontal = 0
+grow_vertical = 2
 text = "Resrouces: [AMOUNT]"
 
 [node name="Instructions" type="Label" parent="."]
+visible = false
 offset_right = 40.0
 offset_bottom = 23.0
 text = "Scroll up/down for zoom
@@ -37,51 +46,35 @@ Press right click to move camera and cancel buildings
 Make units and defend the base.
 If the redot icon gets destroyed, you lose."
 
-[node name="disselectworkers" type="Button" parent="."]
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -81.0
-offset_right = 321.0
-offset_bottom = -50.0
-grow_vertical = 0
-text = "Disselect all allies (Z/middle mouse click)"
-
 [node name="CheckBox" type="CheckBox" parent="."]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 1.0
-offset_top = -136.0
-offset_right = 303.0
-offset_bottom = -82.0
+offset_top = -87.0
+offset_right = 302.0
+offset_bottom = -33.0
 grow_vertical = 0
 text = "Disable camera movement on left mouse(only WASD will be left)"
 autowrap_mode = 3
 metadata/_edit_use_anchors_ = true
 
 [node name="BuildingCost" type="Label" parent="."]
-anchors_preset = 4
+anchors_preset = 6
+anchor_left = 1.0
 anchor_top = 0.5
+anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = 74.0
-offset_top = -184.0
-offset_right = 146.0
-offset_bottom = -161.0
+offset_left = -217.0
+offset_top = 201.0
+offset_right = -145.0
+offset_bottom = 224.0
+grow_horizontal = 0
 grow_vertical = 2
 text = "Cost: "
 
 [node name="surrender" type="Button" parent="."]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -86.0
-offset_top = -38.0
-offset_right = 86.0
-grow_horizontal = 2
-grow_vertical = 0
+offset_right = 172.0
+offset_bottom = 38.0
 text = "Surrender now"
 
 [node name="TrainUnits" type="GridContainer" parent="."]
@@ -297,28 +290,28 @@ layout_mode = 2
 text = "Action 4"
 
 [node name="SelectedUnits" type="GridContainer" parent="."]
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -40.0
-offset_top = -20.0
-offset_bottom = 20.0
-grow_horizontal = 0
-grow_vertical = 2
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -31.0
+offset_right = 126.0
+grow_vertical = 0
+columns = 3
 
 [node name="Aggressive" type="Button" parent="SelectedUnits"]
 layout_mode = 2
-text = "Give selected units aggressive strategy"
+tooltip_text = "Sets all selected units to Aggressive mode"
+text = "AGG"
 
 [node name="Leash" type="Button" parent="SelectedUnits"]
 layout_mode = 2
-text = "Give selected units standard strategy"
+tooltip_text = "Sets all selected units to Standard mode"
+text = "STD"
 
 [node name="Defend" type="Button" parent="SelectedUnits"]
 layout_mode = 2
-text = "Give selected units defencive strategy"
+tooltip_text = "Sets all selected units to Defensive mode"
+text = "DEF"
 
 [connection signal="gui_input" from="BuildingList" to="BuildingList" method="_on_gui_input"]
 [connection signal="item_clicked" from="BuildingList" to="." method="_on_building_list_item_clicked"]
@@ -344,7 +337,6 @@ text = "Give selected units defencive strategy"
 [connection signal="gui_input" from="TrainUnits/TextureRect6" to="." method="_on_texture_rect_6_gui_input"]
 [connection signal="mouse_entered" from="TrainUnits/TextureRect6" to="." method="_on_texture_rect_6_mouse_entered"]
 [connection signal="mouse_exited" from="TrainUnits/TextureRect6" to="." method="_on_texture_rect_6_mouse_exited"]
-[connection signal="pressed" from="Actions/Action1" to="." method="_on_action_1_pressed"]
 [connection signal="pressed" from="SelectedUnits/Aggressive" to="." method="_on_aggressive_pressed"]
 [connection signal="pressed" from="SelectedUnits/Leash" to="." method="_on_leash_pressed"]
 [connection signal="pressed" from="SelectedUnits/Defend" to="." method="_on_defend_pressed"]

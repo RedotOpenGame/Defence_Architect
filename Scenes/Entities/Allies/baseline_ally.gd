@@ -9,6 +9,7 @@ enum EngagementMode { AGGRESSIVE, STANDARD, DEFENSIVE }
 @export var engagement_mode: EngagementMode = EngagementMode.STANDARD
 @export var max_chase_distance: float = 250.0
 @export var attack_range: float = 0.0
+@export var base_damage: float = 1.0
 
 var stat_multiplier: float = 1.0
 var health: float = 20.0
@@ -104,7 +105,7 @@ func _get_separation() -> Vector2:
 	for a in get_tree().get_nodes_in_group("Ally"):
 		if a == self or not a is CharacterBody2D:
 			continue
-		var diff := global_position - a.global_position
+		var diff :Vector2= global_position - a.global_position
 		var dist_sq := diff.length_squared()
 		if dist_sq < sep_sq and dist_sq > 0.25:
 			var dist := sqrt(dist_sq)
@@ -114,7 +115,7 @@ func _get_separation() -> Vector2:
 	return Vector2.ZERO
 
 func damage_func(amount, pierce: float = 0.0) -> void:
-	var actual := max(0.0, amount - max(0.0, defence - pierce))
+	var actual :float= max(0.0, amount - max(0.0, defence - pierce))
 	health -= actual
 	prog_bar.value = health
 	if health <= 0:

@@ -32,6 +32,22 @@ func _ready() -> void:
 	actions.get_child(2).pressed.connect(_on_action_pressed.bind(2))
 	actions.get_child(3).pressed.connect(_on_action_pressed.bind(3))
 
+func _input(_event: InputEvent) -> void:
+	if Input.is_action_just_pressed("1"):
+		shortcut_trainer(0)
+	if Input.is_action_just_pressed("2"):
+		shortcut_trainer(0)
+	if Input.is_action_just_pressed("3"):
+		shortcut_trainer(0)
+	if Input.is_action_just_pressed("4"):
+		shortcut_trainer(0)
+	if Input.is_action_just_pressed("5"):
+		shortcut_trainer(0)
+	if Input.is_action_just_pressed("6"):
+		shortcut_trainer(0)
+	if Input.is_action_just_pressed("f"):
+		_on_action_pressed(0)
+
 # ── Building selection ────────────────────────────────────────────────────────
 
 func on_building_selected(building: Node) -> void:
@@ -160,6 +176,13 @@ func _process(_delta: float) -> void:
 
 # ── Training slot input ───────────────────────────────────────────────────────
 
+func shortcut_trainer(slot_id:int) -> void:
+	if not is_instance_valid(selected_trainer):
+		return
+	if slot_id >= selected_trainer.unlocked_units.size():
+		return
+	selected_trainer.queue_unit(selected_trainer.unlocked_units[slot_id])
+
 func gui_to_trainer(slot_id: int, event: InputEvent) -> void:
 	if not is_instance_valid(selected_trainer):
 		return
@@ -269,22 +292,21 @@ func _on_surrender_pressed() -> void:
 	SaveSystem.save_game()
 	get_tree().change_scene_to_file("res://Scenes/menus/post_death_shop.tscn")
 
-# Legacy: kept so existing tscn connection doesn't error if present.
-func _on_action_1_pressed() -> void:
-	pass
-
 # ── Unit Control ──────────────────────────────────────────────────────────────────────
 
 func _on_aggressive_pressed() -> void:
 	for i in selected_units:
-		i.engagement_mode = i.EngagementMode.AGGRESSIVE
+		if is_instance_valid(i):
+			i.engagement_mode = i.EngagementMode.AGGRESSIVE
 
 
 func _on_leash_pressed() -> void:
 	for i in selected_units:
-		i.engagement_mode = i.EngagementMode.STANDARD
+		if is_instance_valid(i):
+			i.engagement_mode = i.EngagementMode.STANDARD
 
 
 func _on_defend_pressed() -> void:
 	for i in selected_units:
-		i.engagement_mode = i.EngagementMode.DEFENSIVE
+		if is_instance_valid(i):
+			i.engagement_mode = i.EngagementMode.DEFENSIVE

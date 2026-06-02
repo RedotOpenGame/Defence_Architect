@@ -74,5 +74,11 @@ rotation = 0.766034
 scale = Vector2(0.0457273, 0.0457274)
 texture = ExtResource("3_hoagk")
 
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+position = Vector2(1.19209e-07, 0)
+rotation = 0.766034
+scale = Vector2(0.0457273, 0.0457274)
+texture = ExtResource("3_hoagk")
+
 [connection signal="body_entered" from="Attack" to="." method="_on_attack_body_entered"]
 [connection signal="timeout" from="Attack_rate" to="." method="_on_attack_rate_timeout"]

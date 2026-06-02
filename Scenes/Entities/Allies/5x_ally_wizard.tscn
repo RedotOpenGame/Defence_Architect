@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cyceen60eaoli"]
+
+[ext_resource type="PackedScene" uid="uid://dyi03wkx20ebr" path="res://Scenes/Entities/Allies/ally_wizard.tscn" id="1_idttc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_idttc"]
+size = Vector2(28, 28)
+
+[node name="5xAllyWizard" instance=ExtResource("1_idttc")]
+max_health = 100.0
+base_damage = 5.0
+
+[node name="Sprite2D" parent="." index="0"]
+scale = Vector2(0.07, 0.07)
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource("RectangleShape2D_idttc")
