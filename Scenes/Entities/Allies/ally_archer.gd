@@ -1,5 +1,7 @@
 extends BaselineAlly
 
+#NOTE: This unit is deprecated.
+
 var can_fire: bool = true
 var arrow_scene = preload("res://Scenes/Projectiles/ally_arrow.tscn")
 

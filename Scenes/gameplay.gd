@@ -2,7 +2,7 @@ extends Node2D
 
 
 @onready var showcase = $Showcase
-@onready var prog_bar: ProgressBar = $HyperUI/ProgressBar
+@onready var prog_bar: TextureProgressBar = $HyperUI/ProgressBar
 @onready var resources_label = $UI/Resources
 @onready var wave_label: Label = $HyperUI/Wave
 

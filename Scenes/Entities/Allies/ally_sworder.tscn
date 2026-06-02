@@ -13,6 +13,7 @@ radius = 120.15
 [node name="AllySworder" instance=ExtResource("1_ixtft")]
 collision_mask = 3
 script = ExtResource("2_v0lqq")
+base_damage = 3.0
 
 [node name="Attack" type="Area2D" parent="." index="5"]
 collision_layer = 4

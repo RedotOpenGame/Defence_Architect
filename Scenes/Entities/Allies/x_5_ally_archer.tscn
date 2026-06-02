@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://cxjbguy32g28"]
+
+[ext_resource type="PackedScene" uid="uid://ug2w5s4j52m" path="res://Scenes/Entities/Allies/ally_archer_v_2.tscn" id="1_3x23d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_72mkp"]
+size = Vector2(30, 30)
+
+[node name="x5AllyArcher" instance=ExtResource("1_3x23d")]
+max_health = 100.0
+base_damage = 5.0
+
+[node name="Sprite2D" parent="." index="0"]
+scale = Vector2(30, 30)
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource("RectangleShape2D_72mkp")
+
+[node name="TextureRect" parent="Control" index="0"]
+offset_top = -41.0
+offset_bottom = -16.0
+
+[node name="Label" parent="." index="5"]
+offset_top = -17.0
+offset_bottom = 14.0
+text = "pew
+pew"
