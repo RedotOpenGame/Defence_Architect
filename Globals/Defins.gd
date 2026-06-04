@@ -42,6 +42,6 @@ const BUILDING_DEFINITIONS = {
 	},
 	"compounder": {
 		"scene":preload("res://Scenes/Buildings/compounder.tscn"),
-		"cost":1 #CHANGE LATER
+		"cost":20
 	}
 }

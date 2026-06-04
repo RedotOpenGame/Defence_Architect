@@ -157,7 +157,8 @@ func _on_disselectworkers_pressed() -> void:
 
 
 func _on_skip_pressed() -> void:
-	untill_another_attack = 0
+	if enemy_enti.get_child_count() <= 50:
+		untill_another_attack = 0
 
 func _on_check_box_toggled(toggled_on: bool) -> void:
 	$PlayerCamera.moving_using_cursor = !toggled_on
@@ -173,9 +174,6 @@ func _on_surrender_pressed() -> void:
 	SaveSystem.save_game()
 	get_tree().change_scene_to_file("res://Scenes/menus/post_death_shop.tscn")
 
-
-func _on_getexp_pressed() -> void:
-	$Entities/Allies/Player_Actor.get_exp(200)
 
 
 func _on_player_actor_leveled_up() -> void:

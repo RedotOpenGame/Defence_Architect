@@ -1,0 +1,193 @@
+[gd_scene load_steps=11 format=3 uid="uid://gyplr0tu64op"]
+
+[ext_resource type="Script" uid="uid://b71ejdhcy76di" path="res://Scenes/levels/tutorial.gd" id="1_0rgh0"]
+[ext_resource type="PackedScene" uid="uid://ctwaxwojmiovc" path="res://Scenes/statue.tscn" id="1_03cih"]
+[ext_resource type="Texture2D" uid="uid://cnqnp86cncbb3" path="res://Assets/White/WhiteCircle.png" id="2_0rgh0"]
+[ext_resource type="PackedScene" uid="uid://r6an2c43hckb" path="res://Scenes/Player/player_camera.tscn" id="3_snwn5"]
+[ext_resource type="PackedScene" uid="uid://xcrqur1xv5lr" path="res://Scenes/Misc/ui.tscn" id="4_2ev0y"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_0mev6"]
+font_size = 64
+font_color = Color(1, 1, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_snwn5"]
+font_size = 29
+font_color = Color(1, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_wwpa5"]
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_0rgh0"]
+font_color = Color(1, 0, 0, 1)
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_snwn5"]
+size = Vector2(128, 126)
+
+[node name="Tutorial" type="Node2D"]
+script = ExtResource("1_0rgh0")
+
+[node name="Statue" parent="." instance=ExtResource("1_03cih")]
+
+[node name="Objects" type="Node2D" parent="."]
+
+[node name="Helipad" type="Node2D" parent="Objects"]
+visible = false
+
+[node name="Sprite2D" type="Sprite2D" parent="Objects/Helipad"]
+self_modulate = Color(0.2484, 0.2484, 0.2484, 1)
+position = Vector2(175, -154)
+scale = Vector2(0.261905, 0.261905)
+texture = ExtResource("2_0rgh0")
+
+[node name="Label" type="Label" parent="Objects/Helipad"]
+offset_left = 153.0
+offset_top = -201.0
+offset_right = 201.0
+offset_bottom = -113.0
+text = "H"
+label_settings = SubResource("LabelSettings_0mev6")
+
+[node name="PlayerCamera" parent="." instance=ExtResource("3_snwn5")]
+position = Vector2(400, 0)
+zoom = Vector2(0.6, 0.6)
+position_smoothing_enabled = true
+position_smoothing_speed = 8.0
+max_camera_zoom = 4.0
+
+[node name="Entities" type="Node2D" parent="."]
+
+[node name="Allies" type="Node2D" parent="Entities" groups=["Ally_storage"]]
+
+[node name="Hostiles" type="Node2D" parent="Entities" groups=["Enemy_storage"]]
+
+[node name="UI" parent="." instance=ExtResource("4_2ev0y")]
+
+[node name="Enemyspawnpos" type="Marker2D" parent="."]
+position = Vector2(1572, 0)
+
+[node name="HyperUI" type="CanvasLayer" parent="."]
+
+[node name="ProgressBar" type="TextureProgressBar" parent="HyperUI"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -53.5
+offset_right = 53.5
+offset_bottom = 107.0
+grow_horizontal = 2
+step = 0.1
+value = 100.0
+fill_mode = 8
+nine_patch_stretch = true
+texture_progress = ExtResource("2_0rgh0")
+tint_progress = Color(1, 0, 0, 0.290196)
+
+[node name="Wave" type="Label" parent="HyperUI"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -29.0
+offset_top = 40.0
+offset_right = 31.0
+offset_bottom = 63.0
+grow_horizontal = 2
+text = "Wave: 0"
+
+[node name="skip" type="Button" parent="HyperUI"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -97.0
+offset_right = -55.0
+offset_bottom = 102.0
+grow_horizontal = 2
+text = "SKIP"
+
+[node name="Tutorial" type="Control" parent="HyperUI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="greetings" type="RichTextLabel" parent="HyperUI/Tutorial"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -316.0
+offset_top = -211.0
+offset_right = 316.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+bbcode_enabled = true
+text = "Architect,
+Today you are going to lear how to defend your statue townhall.
+
+You need to press on 'barracks' on the list on the right.
+
+------------------>"
+horizontal_alignment = 1
+metadata/_edit_group_ = true
+
+[node name="Crossout" type="Label" parent="HyperUI/Tutorial/greetings"]
+layout_mode = 0
+offset_left = 437.0
+offset_top = 1.0
+offset_right = 519.0
+offset_bottom = 46.0
+text = "____"
+label_settings = SubResource("LabelSettings_snwn5")
+
+[node name="show_hide" type="Button" parent="HyperUI/Tutorial"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -22.0
+offset_top = -31.0
+offset_right = 22.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Show/hide"
+
+[node name="waveshowcase" type="Label" parent="."]
+offset_left = 736.0
+offset_top = -92.0
+offset_right = 983.0
+offset_bottom = -5.0
+text = "ENEMIES ATTACK
+<--------------"
+label_settings = SubResource("LabelSettings_wwpa5")
+
+[node name="secrettext1" type="Label" parent="."]
+visible = false
+offset_left = -73.0
+offset_top = -11.0
+offset_right = 71.0
+offset_bottom = 12.0
+text = "NOT HERE RETARD"
+label_settings = SubResource("LabelSettings_0rgh0")
+
+[node name="secretrevealer1" type="Area2D" parent="."]
+collision_layer = 512
+collision_mask = 512
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="secretrevealer1"]
+shape = SubResource("RectangleShape2D_snwn5")
+
+[node name="Showcase" type="Node2D" parent="."]
+
+[connection signal="pressed" from="HyperUI/skip" to="." method="_on_skip_pressed"]
+[connection signal="pressed" from="HyperUI/Tutorial/show_hide" to="." method="_on_show_hide_pressed"]
+[connection signal="body_entered" from="secretrevealer1" to="." method="_on_secretrevealer_1_body_entered"]
+[connection signal="body_exited" from="secretrevealer1" to="." method="_on_secretrevealer_1_body_exited"]

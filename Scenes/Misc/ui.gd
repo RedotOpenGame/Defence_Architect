@@ -45,7 +45,7 @@ func _input(_event: InputEvent) -> void:
 		shortcut_trainer(0)
 	if Input.is_action_just_pressed("6"):
 		shortcut_trainer(0)
-	if Input.is_action_just_pressed("f"):
+	if Input.is_action_just_pressed("u"):
 		_on_action_pressed(0)
 
 # ── Building selection ────────────────────────────────────────────────────────
@@ -158,10 +158,11 @@ func _process(_delta: float) -> void:
 		selected_building.collision_layer = 512
 		selected_building.collision_mask = 512
 		selected_building.modulate = Color(1, 1, 1, 0.4)
-		selected_building.process_mode = ProcessMode.PROCESS_MODE_DISABLED
 		if selected_building not in ally_enti.get_children():
 			ally_enti.add_child(selected_building)
-
+		
+		if "selection" in selected_building: #we need ts in order to not accidentally call the menu from the 'ghost' building
+			selected_building.selection.process_mode = ProcessMode.PROCESS_MODE_DISABLED
 		if Input.is_action_just_pressed("left_mouse_click"):
 			if build_mode and Gameplay.resource >= building_cost:
 				if selected_building.check_area_overlaps():
@@ -200,6 +201,7 @@ func show_train_info(slot_id: int) -> void:
 	if slot_id >= selected_trainer.unlocked_units.size():
 		return
 	var unit_name = selected_trainer.unlocked_units[slot_id]
+	trainformation.visible = true
 	trainformation.text = "\nCost: %s\nTrain time: %s" % [
 		Defins.UNIT_DEFINITIONS[unit_name]["cost"],
 		Defins.UNIT_DEFINITIONS[unit_name]["train_time"]
@@ -287,6 +289,16 @@ func _on_texture_rect_6_mouse_exited() -> void:
 	trainformation.text = ""
 
 # ── Misc ──────────────────────────────────────────────────────────────────────
+
+func tutorial_mode() -> void:
+	building_list.clear()
+	building_list.add_item("barracks")
+	$surrender.text = 'Go back to menu'
+	$surrender.pressed.disconnect(_on_surrender_pressed)
+	$surrender.pressed.connect(_on_return_pressed)
+
+func _on_return_pressed() -> void:
+	get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")
 
 func _on_surrender_pressed() -> void:
 	SaveSystem.save_game()

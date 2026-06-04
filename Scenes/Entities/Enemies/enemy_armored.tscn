@@ -22,7 +22,7 @@ collision_layer = 2
 collision_mask = 7
 script = ExtResource("1_8ifme")
 max_health = 60.0
-defence = 2.0
+defence = 3.0
 speed = 160.0
 reward_for_killing = 2.0
 

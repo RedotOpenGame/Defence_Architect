@@ -3,23 +3,29 @@ extends CharacterBody2D
 var health: int = 80
 var selected: bool = false
 var on_cooldown: bool = false
+var units_for_merge:Array = []
 
 const REQUIRED_COUNT: int = 5
 const STAT_MULT: float = 5.0
 
 @onready var prog_bar: ProgressBar = $ProgressBar
+@onready var cooldown_showcase: ProgressBar = $CooldownShowcase
+@onready var cooldown: Timer = $Cooldown
 
 func _ready() -> void:
 	prog_bar.max_value = health
 	prog_bar.value = health
+	cooldown_showcase.max_value = cooldown.wait_time
+	
 
 func _process(_delta: float) -> void:
+	cooldown_showcase.value = cooldown.wait_time - cooldown.time_left
 	if not on_cooldown:
 		_check_for_compound()
 
 func _check_for_compound() -> void:
 	var by_script: Dictionary = {}
-	for node in get_tree().get_nodes_in_group("Ally"):
+	for node in units_for_merge:
 		if not node is BaselineAlly:
 			continue
 		var s = node.get_script()
@@ -80,3 +86,11 @@ func check_area_overlaps() -> bool:
 func _on_selection_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == 1 and event.pressed:
 		selected = not selected
+
+
+func _on_placement_body_entered(body: Node2D) -> void:
+	units_for_merge.append(body)
+
+
+func _on_placement_body_exited(body: Node2D) -> void:
+	units_for_merge.erase(body)

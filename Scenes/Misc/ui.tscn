@@ -258,6 +258,7 @@ offset_top = 214.0
 offset_right = -2.0
 offset_bottom = 336.0
 grow_horizontal = 0
+mouse_filter = 2
 text = "Cost: [int]
 Time: [float]
 

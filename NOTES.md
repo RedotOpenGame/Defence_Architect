@@ -23,3 +23,5 @@ TEMP:
 	Sworder should have standard as standard strategy[done]
 	Barracks should have a limit on how much units it can make[not sure if I should even do this]
 	Optimizations: I should make the 'unit merge' mechanic where player would be able to merge 5 units into a stronger unit that will have 5x stats of those units
+	Current merged units are WAY too powerful: make their damage 1x, and instead of 5x health, just decrease the x by 1 when the original health goes down.
+	I need to think about more enemies to add.

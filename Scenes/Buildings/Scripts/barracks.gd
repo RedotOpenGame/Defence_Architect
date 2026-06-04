@@ -2,6 +2,8 @@ extends CharacterBody2D
 
 var health: int = 120
 
+@onready var selection: Control = $Selection
+
 @onready var prog_bar: ProgressBar = $ProgressBar
 @onready var marker: Marker2D = $Marker2D
 @onready var train_bar: ProgressBar = $Control/ProgressBar

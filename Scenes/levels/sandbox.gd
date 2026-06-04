@@ -23,10 +23,7 @@ var building_to_spawn
 func _ready() -> void:
 	Gameplay.resource = 99999
 	resources_label.text = str("Resources: ", Gameplay.resource)
-	
-	for i in Gameplay.owned_buildings:
-		building_list.add_item(i)
-	
+
 func _process(delta: float) -> void:
 	resources_label.text = str("Resources: ", Gameplay.resource)
 
